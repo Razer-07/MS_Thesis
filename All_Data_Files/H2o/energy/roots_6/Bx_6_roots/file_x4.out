@@ -1,0 +1,1542 @@
+
+Running the London Hartree-Fock program at /home/sangita.sen/packages/london/london.x.
+Founded by Erik Tellgren, Alessandro Soncini and Trygve Helgaker.
+Programming by:
+  Erik Tellgren (main programmer)
+  Kai Kaarvann Lange
+  Andrew M. Teale
+  Ulf Ekstrom
+  Stella Stopkowicz
+  Jon H. Austad
+
+
+Basis file /home/sangita.sen/packages/london/baslib/aug-cc-pVDZ opened for reading.
+Basis file /home/sangita.sen/packages/london/baslib/aug-cc-pVDZ opened for reading.
+Basis file /home/sangita.sen/packages/london/baslib/aug-cc-pVDZ opened for reading.
+User input successfully read from file_x4.inp.
+
+london-input{
+  analysis{
+    analysis-only = no
+    xml-print-potential-basis-overlap = no
+    xml-print-potential-basis-kinetic = no
+    export-operators = no
+    # decypher-density-matrix-file = binary-file, plain-text-file
+    # density-matrix-binary-to-text = binary-input-file, text-output-file
+    # density-matrix-text-to-binary = text-input-file, binary-output-file
+    # density-matrix-for-plotting = filename
+    # density-plot-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # streamline-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # vortexline-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # current-through-plane = {density_matrix_file,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # linearly-combine-density-matrices = file : 0.6 * infile1, 0.4 * infile2, ...
+    # spin-rotate-2c-density-matrix = file : infile, angle_degrees, (ux, uy, uz)
+    linear-dependence-tol = 1e-06
+    # overlap-for-ci-state-files = file1, file2
+  }
+
+  scf{
+    spin-symmetry-constraint = Unrestricted Hartree-Fock
+    linear-dependence-tol = 1e-10
+    uhf-spin-projection = 0
+    disable-spin-zeeman-in-fock-matrix = no
+    noisy-init-guess = no
+    # density-matrix-input-file = 
+    # density-matrix-output-file = 
+    # density-plot-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # molecular-orbitals-to-plot = (1,2,3,...)
+    min-scf-iterations = 0
+    max-scf-iterations = 160
+    use-density-fitting = no
+    use-admm = no
+    analyze-using-dft-grid = no
+
+    diis{
+      convergence-tolerance = 1e-10
+      subspace-dimension = 7
+      diagonalization-temperature = 0
+    }
+  }
+
+  casscf{
+    max-active-orbitals = 2000
+    number-of-frozen-orbitals = 0
+    number-of-states-in-casscf-optimization = 1
+    number-of-ci-states = 1
+    spin-projection = default
+    num-1exc-init-vec = 0
+    num-2exc-init-vec = 0
+    use-noisy-init-vec = no
+    ci-max-subspace-dim = default
+    ci-convergence-tol = 1e-06
+    # density-matrix-input-file = 
+    # density-matrix-output-file = 
+    # ci-states-output-file = 
+    # density-plot-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # analysis-weights = (w0, w1, ...)
+  }
+
+  mp2{
+    spin-projection = default
+    number-of-weights = 8
+    basis-functions-per-block = 20
+    cs-tolerance = 0
+    print-mp2-components = 0
+    # density-matrix-input-file = 
+    # density-matrix-output-file = 
+    #property-request = relaxed-density-matrix
+  }
+
+  rsp{
+    number-of-roots-requested = 6
+    root-selection-method = energy
+    excitation-basis = MObasis
+    starting-guess = UnitGuess
+    solver_choice = GenEig
+    method_choice = RPA
+    precondition = false
+    initial-subspace-dimension = 100
+    maximum-subspace-dimension = 800
+    convergence-tolerance = 1e-10
+    max-rsp-iterations = 200
+    # density-matrix-input-file = 
+    # density-matrix-output-file = 
+  }
+
+  coupled-cluster{
+    truncation-level = CCSD
+    property-request = off
+    spin-projection = default
+    max-it = 150
+    write-t-amplitudes = yes
+    read-t-amplitudes = no
+    # density-matrix-output-file = 
+    # memory-in-gb = 
+    # interface = 
+    # molecular-orbitals-to-freeze = (1,3,5,...)
+    diis{
+      convergence-tolerance = 1e-06
+      subspace-dimension = 7
+      diagonalization-temperature = 0
+    }
+  }
+
+  finite-difference{
+    run-finite-difference = false
+    run-type = gradient
+    use-ref-density = false
+    step-size = 0.0005
+  }
+
+  system{
+    molecular-charge = 0
+    correlation-model = RSP
+
+    hamiltonian{
+      electron-mass = 1
+      speed-of-light = 137.036
+      adiabatic-connection-lambda = 1
+      nuclear-charge-distribution = point charge
+
+      magnetic-field = (0.04, 0, 0)
+      gauge-origin = (0, 0, 0.1173)
+
+      linear-magnetic-field = {(0, 0, 0), (0, 0, 0), (0, 0, 0)}
+      linear-magnetic-origin = (0, 0, 0)
+
+      electric-field = (0, 0, 0)
+      electric-origin = (0, 0, 0)
+      linear-electric-field = {(0, 0, 0), (0, 0, 0), (0, 0, 0)}
+
+      include-basis-expanded-scalar-potential = no
+      scalar-potential-coefficients = (empty)
+      include-basis-expanded-vector-potential = no
+      vector-potential-coefficients-x = (empty)
+      vector-potential-coefficients-y = (empty)
+      vector-potential-coefficients-z = (empty)
+      include-repulsion-from-external-density = no
+      external-charge-density-scale-factor = 1
+      include-coulomb-distance-to-external-density = no
+      external-charge-density-distance-factor = 1
+      # external-charge-density-file = filename
+      # lieb-ref-density-file = filename
+      # potential-plot-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+
+      integral{
+        use-coulomb-integral-permutation-symmetry = yes
+        use-cauchy-schwarz-screening = yes
+        cauchy-schwarz-tol = 1e-15
+        boys-function-tol = 1e-17
+      }
+
+      dft{
+        # xc-functional = 0.7 * lda + 0.54 * lyp
+        # xc-fun-parameter = {param1 = 0.1, param2 = 0.2, param3 = 0.3}
+        jp-functional = none
+        vrg-functional = none
+        tau-correction = none
+        vrg-hard-rs-cutoff = 62035.049
+        vrg-soft-density-cutoff = 1e-14
+        exact-exchange-fraction = default
+        # gridfile = 
+        radial-grid-type = LMG
+        allow-grid-pruning = yes
+        gc2-radial-grid-threshold = 1e-13
+        lebedev-angular-target-degree = 35
+        lebedev-angular-minimal-degree = 15
+        weight-screen-threshold = 1e-20
+        becke-hardness = 3
+        allow-becke-atom-size-correction = yes
+      }
+    }
+
+    # data on state flags lost, output incomplete here
+    use-london-orbitals = yes
+    gto-contraction-type = all, normalizedprimitive
+    basis = aug-cc-pVDZ
+    # density-fitting-basis = 
+    # admm-basis = 
+    # scalar-potential-basis = 
+    # vector-potential-basis = 
+    # if you really want to: # orbital-wave-vector-offset = (0, 0, 0)
+    charge = 1
+    H            0       0.7572      -0.4692
+    H            0      -0.7572      -0.4692
+    charge = 8
+    O            0            0       0.1173
+  }
+}
+
+Basis set information:
+The orbital basis consists of 59 basis functions formed from linear combinations of 59 primitive basis functions.
+The density-fitting basis consists of 0 basis functions formed from linear combinations of 0 primitive basis functions.
+The scalar potential basis consists of 0 basis functions formed from linear combinations of 0 primitive basis functions.
+The vector potential basis consists of 0 basis functions formed from linear combinations of 0 primitive basis functions.
+UHF Spin type 2
+
+RSP: Running Hartree-Fock to determine orbital space.
+RSP: run scf2
+
+
+SCF: Running SCF optimization.
+
+SCF: The SCF basis contains 59 basis functions.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+SCF-SD: Initial density by diagonalizing the one-electron part of the Fock matrix.
+Initial trace: Tr(D) = (10,1.57422e-16)
+
+SCF iteration 1:       [wall time: Thu Sep 16 23:14:04 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 289 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -60.76190913 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            128.7204485
+  Nuclear attraction: -277.2915719
+  Spin Zeeman effect: -3.019806627e-16
+  Coulomb:            84.4851441
+  Exchange:           -14.04163185
+  Total:              -60.76190913
+
+ Ehomo(Down) = 3804.482348, Elumo(Down) = 22783.15918
+ Ehomo( Up ) = 3804.522348, Elumo( Up ) = 22783.19918
+ DIIS error norm: 20.72027964
+
+SCF iteration 2:       [wall time: Thu Sep 16 23:14:05 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 376 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 2 seconds (with 2 seconds used for Coulomb and exchange).
+ Total energy: -61.53109624 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            59.50880179
+  Nuclear attraction: -153.8457863
+  Spin Zeeman effect: -6.394884622e-16
+  Coulomb:            21.45851015
+  Exchange:           -6.018323949
+  Total:              -61.53109624
+
+ Ehomo(Down) = -0.080371975, Elumo(Down) = 0.00562730674
+ Ehomo( Up ) = -0.040371975, Elumo( Up ) = 0.04562730674
+ DIIS error norm: 6.251094045
+
+SCF iteration 3:       [wall time: Thu Sep 16 23:14:07 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 323 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -72.40435572 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            94.09500817
+  Nuclear attraction: -237.7271409
+  Spin Zeeman effect: 1.421085472e-16
+  Coulomb:            65.20781296
+  Exchange:           -11.34573793
+  Total:              -72.40435572
+
+ Ehomo(Down) = -0.05663085903, Elumo(Down) = 0.01135709957
+ Ehomo( Up ) = -0.01663085903, Elumo( Up ) = 0.05135709957
+ DIIS error norm: 6.065858447
+
+SCF iteration 4:       [wall time: Thu Sep 16 23:14:08 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 342 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.2042075 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            85.38661566
+  Nuclear attraction: -224.5433715
+  Spin Zeeman effect: -1.065814104e-16
+  Coulomb:            57.99318428
+  Exchange:           -10.406338
+  Total:              -74.2042075
+
+ Ehomo(Down) = -0.6407681595, Elumo(Down) = 0.001059059273
+ Ehomo( Up ) = -0.6007681595, Elumo( Up ) = 0.04105905927
+ DIIS error norm: 2.19345534
+
+SCF iteration 5:       [wall time: Thu Sep 16 23:14:09 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 357 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.5923684 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.73958292
+  Nuclear attraction: -216.1284427
+  Spin Zeeman effect: 2.486899575e-16
+  Coulomb:            53.21109023
+  Exchange:           -9.780300895
+  Total:              -74.5923684
+
+ Ehomo(Down) = -0.5760539522, Elumo(Down) = 0.02270871773
+ Ehomo( Up ) = -0.5360539522, Elumo( Up ) = 0.06270871773
+ DIIS error norm: 0.1992483609
+
+SCF iteration 6:       [wall time: Thu Sep 16 23:14:10 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 362 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 2 seconds (with 2 seconds used for Coulomb and exchange).
+ Total energy: -74.59920163 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.28471242
+  Nuclear attraction: -215.105579
+  Spin Zeeman effect: -1.243449788e-16
+  Coulomb:            52.5464052
+  Exchange:           -9.690442279
+  Total:              -74.59920163
+
+ Ehomo(Down) = -0.5885785548, Elumo(Down) = 0.02208230343
+ Ehomo( Up ) = -0.5485785548, Elumo( Up ) = 0.06208230343
+ DIIS error norm: 0.05374807903
+
+SCF iteration 7:       [wall time: Thu Sep 16 23:14:12 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 361 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59941611 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.35551425
+  Nuclear attraction: -215.2181355
+  Spin Zeeman effect: -5.329070518e-17
+  Coulomb:            52.59376688
+  Exchange:           -9.696263805
+  Total:              -74.59941611
+
+ Ehomo(Down) = -0.5917891905, Elumo(Down) = 0.02157932994
+ Ehomo( Up ) = -0.5517891905, Elumo( Up ) = 0.06157932994
+ DIIS error norm: 0.01092219878
+
+SCF iteration 8:       [wall time: Thu Sep 16 23:14:13 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59942776 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37276903
+  Nuclear attraction: -215.2473751
+  Spin Zeeman effect: 1.243449788e-16
+  Coulomb:            52.6075797
+  Exchange:           -9.698103436
+  Total:              -74.59942776
+
+ Ehomo(Down) = -0.5919017656, Elumo(Down) = 0.02153019421
+ Ehomo( Up ) = -0.5519017656, Elumo( Up ) = 0.06153019421
+ DIIS error norm: 0.00128489117
+
+SCF iteration 9:       [wall time: Thu Sep 16 23:14:14 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37470167
+  Nuclear attraction: -215.2510442
+  Spin Zeeman effect: -1.953992523e-16
+  Coulomb:            52.60959496
+  Exchange:           -9.698382434
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.59181404, Elumo(Down) = 0.0215391369
+ Ehomo( Up ) = -0.55181404, Elumo( Up ) = 0.0615391369
+ DIIS error norm: 0.0002039708412
+
+SCF iteration 10:       [wall time: Thu Sep 16 23:14:15 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 2 seconds (with 2 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37439993
+  Nuclear attraction: -215.2505251
+  Spin Zeeman effect: 1.243449788e-16
+  Coulomb:            52.60934666
+  Exchange:           -9.69835157
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.5918117385, Elumo(Down) = 0.02153940965
+ Ehomo( Up ) = -0.5518117385, Elumo( Up ) = 0.06153940965
+ DIIS error norm: 2.838120944e-05
+
+SCF iteration 11:       [wall time: Thu Sep 16 23:14:17 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37437693
+  Nuclear attraction: -215.2504763
+  Spin Zeeman effect: -1.953992523e-16
+  Coulomb:            52.60931677
+  Exchange:           -9.698347482
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.5918114265, Elumo(Down) = 0.02153939094
+ Ehomo( Up ) = -0.5518114265, Elumo( Up ) = 0.06153939094
+ DIIS error norm: 3.621022062e-06
+
+SCF iteration 12:       [wall time: Thu Sep 16 23:14:18 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37437865
+  Nuclear attraction: -215.2504781
+  Spin Zeeman effect: 1.953992523e-16
+  Coulomb:            52.609317
+  Exchange:           -9.698347543
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.5918113851, Elumo(Down) = 0.02153939213
+ Ehomo( Up ) = -0.5518113851, Elumo( Up ) = 0.06153939214
+ DIIS error norm: 3.854498493e-07
+
+SCF iteration 13:       [wall time: Thu Sep 16 23:14:19 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37437881
+  Nuclear attraction: -215.2504784
+  Spin Zeeman effect: -1.421085472e-16
+  Coulomb:            52.60931707
+  Exchange:           -9.698347559
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.5918113682, Elumo(Down) = 0.02153939307
+ Ehomo( Up ) = -0.5518113682, Elumo( Up ) = 0.06153939307
+ DIIS error norm: 7.540138238e-08
+
+SCF iteration 14:       [wall time: Thu Sep 16 23:14:20 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 2 seconds (with 2 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37437876
+  Nuclear attraction: -215.2504783
+  Spin Zeeman effect: 3.552713679e-17
+  Coulomb:            52.60931704
+  Exchange:           -9.698347556
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.5918113653, Elumo(Down) = 0.02153939327
+ Ehomo( Up ) = -0.5518113653, Elumo( Up ) = 0.06153939327
+ DIIS error norm: 1.261088489e-08
+
+SCF iteration 15:       [wall time: Thu Sep 16 23:14:22 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37437876
+  Nuclear attraction: -215.2504783
+  Spin Zeeman effect: -2.664535259e-16
+  Coulomb:            52.60931703
+  Exchange:           -9.698347556
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.5918113657, Elumo(Down) = 0.02153939326
+ Ehomo( Up ) = -0.5518113657, Elumo( Up ) = 0.06153939326
+ DIIS error norm: 1.571294708e-09
+
+SCF iteration 16:       [wall time: Thu Sep 16 23:14:23 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37437876
+  Nuclear attraction: -215.2504783
+  Spin Zeeman effect: -2.309263891e-16
+  Coulomb:            52.60931703
+  Exchange:           -9.698347556
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.5918113656, Elumo(Down) = 0.02153939326
+ Ehomo( Up ) = -0.5518113656, Elumo( Up ) = 0.06153939326
+ DIIS error norm: 1.869959892e-10
+
+SCF iteration 17:       [wall time: Thu Sep 16 23:14:24 2021]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: -74.59942802 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  17.36570202
+  Kinetic:            80.37437876
+  Nuclear attraction: -215.2504783
+  Spin Zeeman effect: 1.776356839e-17
+  Coulomb:            52.60931703
+  Exchange:           -9.698347556
+  Total:              -74.59942802
+
+ Ehomo(Down) = -0.5918113656, Elumo(Down) = 0.02153939326
+ Ehomo( Up ) = -0.5518113656, Elumo( Up ) = 0.06153939326
+ DIIS error norm: 4.244630278e-11
+
+Converged SCF results:
+-----------------------
+(pre-RSP) Nuclear repulsion:  17.36570202439076
+(pre-RSP) Kinetic:            80.37437875920909
+(pre-RSP) Nuclear attraction: -215.2504782789271
+(pre-RSP) Spin Zeeman effect: 1.776356839400251e-17
+(pre-RSP) Coulomb:            52.60931702981354
+(pre-RSP) Exchange:           -9.698347555702005
+(pre-RSP) Total electronic:   -91.96513004560643
+(pre-RSP) Total:              -74.59942802121566
+
+(pre-RSP) E(LUMO, Down): 0.02153939326110403
+(pre-RSP) E(HOMO, Down): -0.5918113656272529
+(pre-RSP) E(GAP, Down):  0.6133507588883569
+
+(pre-RSP) E(LUMO,  Up ): 0.06153939326092178
+(pre-RSP) E(HOMO,  Up ): -0.5518113656278915
+(pre-RSP) E(GAP,  Up ):  0.6133507588888132
+
+Orbital energies (Eorb), orbital contributions to the total energy (Econtrib), and reflection symmetry properties for the molecular orbitals:
+
+Orbital analysis (pre-RSP)
+    Eorb      Econtrib  Occ  Reflection(xy)  Reflection(xz)  Reflection(yz)
+---------------------------------------------------------------------------
+Spin Down
+  -20.5348     -27.269   1  (0.6528,0.0000)  (1.0000,0.0000)  (1.0000,-0.0000)
+   -1.7466    -5.52973   1  (0.7355,0.0000)  (0.9998,0.0000)  (1.0000,-0.0000)
+  -1.06516    -4.86358   1  (0.9740,0.0000)  (-0.9950,-0.0000)  (1.0000,-0.0000)
+ -0.688719    -4.23609   1  (-0.6907,-0.0000)  (0.9953,-0.0000)  (1.0000,0.0000)
+ -0.591811    -4.13417   1  (0.9911,-0.0000)  (1.0000,0.0000)  (-1.0000,-0.0000)
+ 0.0215394   -0.840386   0  (0.8016,0.0000)  (0.7127,0.0000)  (1.0000,0.0000)
+   0.03651   -0.717746   0  (0.7867,0.0000)  (-0.3991,0.0000)  (1.0000,0.0000)
+  0.143476   -0.939888   0  (-0.2840,0.0000)  (0.8518,-0.0000)  (1.0000,-0.0000)
+   0.15242    -0.98881   0  (0.9430,-0.0000)  (0.9999,0.0000)  (-1.0000,-0.0000)
+  0.180999   -0.871552   0  (0.7389,-0.0000)  (-0.6414,0.0000)  (1.0000,0.0000)
+   0.20356   -0.964819   0  (0.5199,-0.0000)  (0.7501,-0.0000)  (1.0000,0.0000)
+  0.325234    -1.06462   0  (-0.0140,-0.0000)  (-0.3395,0.0000)  (1.0000,0.0000)
+  0.389734    -1.03968   0  (0.8615,-0.0000)  (-0.9331,-0.0000)  (-1.0000,0.0000)
+  0.402723    -1.00139   0  (0.4808,0.0000)  (0.4178,-0.0000)  (1.0000,0.0000)
+  0.442092    -1.04962   0  (-0.1673,0.0000)  (0.9029,-0.0000)  (1.0000,-0.0000)
+  0.490104    -1.13911   0  (0.3759,0.0000)  (0.9433,0.0000)  (-1.0000,-0.0000)
+  0.532994   -0.927133   0  (0.5853,0.0000)  (-0.9439,0.0000)  (1.0000,0.0000)
+  0.564216   -0.958984   0  (0.8190,-0.0000)  (0.9151,0.0000)  (1.0000,-0.0000)
+  0.601393    -0.80144   0  (0.6091,0.0000)  (-0.8666,-0.0000)  (1.0000,0.0000)
+  0.962701    -1.24362   0  (0.2546,-0.0000)  (0.9864,0.0000)  (1.0000,0.0000)
+Spin Up
+  -20.4948     -27.249   1  (0.6528,-0.0000)  (1.0000,-0.0000)  (1.0000,-0.0000)
+   -1.7066    -5.50973   1  (0.7355,0.0000)  (0.9998,-0.0000)  (1.0000,0.0000)
+  -1.02516    -4.84358   1  (0.9740,-0.0000)  (-0.9950,-0.0000)  (1.0000,0.0000)
+ -0.648719    -4.21609   1  (-0.6907,0.0000)  (0.9953,0.0000)  (1.0000,0.0000)
+ -0.551811    -4.11417   1  (0.9911,0.0000)  (1.0000,0.0000)  (-1.0000,-0.0000)
+ 0.0615394   -0.820386   0  (0.8016,-0.0000)  (0.7127,0.0000)  (1.0000,0.0000)
+   0.07651   -0.697746   0  (0.7867,0.0000)  (-0.3991,0.0000)  (1.0000,0.0000)
+  0.183476   -0.919888   0  (-0.2840,-0.0000)  (0.8518,-0.0000)  (1.0000,-0.0000)
+   0.19242    -0.96881   0  (0.9430,-0.0000)  (0.9999,0.0000)  (-1.0000,0.0000)
+  0.220999   -0.851552   0  (0.7389,-0.0000)  (-0.6414,-0.0000)  (1.0000,-0.0000)
+   0.24356   -0.944819   0  (0.5199,-0.0000)  (0.7501,-0.0000)  (1.0000,0.0000)
+  0.365234    -1.04462   0  (-0.0140,0.0000)  (-0.3395,-0.0000)  (1.0000,-0.0000)
+  0.429734    -1.01968   0  (0.8615,0.0000)  (-0.9331,-0.0000)  (-1.0000,-0.0000)
+  0.442723   -0.981387   0  (0.4808,-0.0000)  (0.4178,0.0000)  (1.0000,0.0000)
+  0.482092    -1.02962   0  (-0.1673,0.0000)  (0.9029,-0.0000)  (1.0000,0.0000)
+  0.530104    -1.11911   0  (0.3759,0.0000)  (0.9433,0.0000)  (-1.0000,-0.0000)
+  0.572994   -0.907133   0  (0.5853,-0.0000)  (-0.9439,-0.0000)  (1.0000,0.0000)
+  0.604216   -0.938984   0  (0.8190,-0.0000)  (0.9151,-0.0000)  (1.0000,-0.0000)
+  0.641393    -0.78144   0  (0.6091,0.0000)  (-0.8666,-0.0000)  (1.0000,0.0000)
+    1.0027    -1.22362   0  (0.2546,-0.0000)  (0.9864,-0.0000)  (1.0000,0.0000)
+
+
+Properties:
+-----------
+Spin-projection on field: <sigma_B> = <2 S_B> = 8.881784197001252e-16
+Spin-projection squared: <sigma_B> = <4 S_B^2> = -1.154631945610163e-14
+Total spin: <sigma^2> = <4 S^2> = -2.664535259100376e-15 = 4 * -6.661338147750939e-16 * (-6.661338147750939e-16 + 1)
+Total spin quantum number: s = -6.661338147750939e-16
+
+
+(SCF) Traces of the SCF 1-electron density matrix with simple operators
+(SCF) Mechanical/kinetic momentum:
+(SCF)     <PIx> = 5.220474125892132e-14
+(SCF)     <PIy> = -0.0003337341974792609
+(SCF)     <PIz> = -6.857579699001778e-16
+(SCF)     B x pi = (0, 2.743031879600711e-17, -1.334936789917044e-05)
+(SCF) Angular momentum w.r.t. gauge origin (0, 0, 0.1173):
+(SCF)     <Lx> = 0.1759691997246643
+(SCF)     <Ly> = 2.945729906863806e-15
+(SCF)     <Lz> = -2.738201381166748e-15
+(SCF) Coordinate derivative contribution to angular momentum w.r.t. C = (0, 0, 0.1173):
+(SCF)     <Lcoord_x> = -0.01054885538785408
+(SCF)     <Lcoord_y> = 1.87013766698927e-15
+(SCF)     <Lcoord_z> = -3.641177095024153e-15
+(SCF) Dipole moment:
+(SCF)     <x> = -1.262763804770225e-13
+(SCF)     <y> = 6.379233162805366e-15
+(SCF)     <z> = 0.6405619312648337
+(SCF) Nuclear dipole moment:
+(SCF)     <X> = 0
+(SCF)     <Y> = 0
+(SCF)     <Z> = 0
+(SCF) Total dipole moment: (1.262763804770225e-13, -6.379233162805366e-15, -0.6405619312648337)
+(SCF) Coordinate derivative contribution to angular momentum w.r.t. center of charge (-1.262763804770226e-14, 6.379233162805372e-16, 0.06405619312648345):
+(SCF)     <Lambda_x> = -0.009964105514619537
+(SCF)     <Lambda_y> = 4.64971682846136e-15
+(SCF)     <Lambda_z> = -3.779860073970226e-15
+(SCF) Electronic quadrupole moments w.r.t. center of electronic charge at (-1.262763804770226e-14, 6.379233162805372e-16, 0.06405619312648345):
+(SCF)         x         y          z
+(SCF) x: 4.706076481854961  -5.377961199371552e-14  -5.187222090767784e-14
+(SCF) y: -5.377961199371552e-14  4.665026824464377  -1.208898794294498e-14
+(SCF) z: -5.187222090767784e-14  -1.208898794294498e-14  4.632526901457708
+(SCF) Magnetic quadrupole moments w.r.t. C = (0, 0, 0):
+(SCF)         x         y          z
+(SCF) Jx: 7.50326418229066e-15  -1.037617248992058e-15  -0.01327757195152921
+(SCF) Jy: -3.75576773015994e-16  7.152271795571238e-15  -2.111819264722803e-14
+(SCF) Jz: 0.003831826296668066  1.18814653537493e-14  -1.46555359778619e-14
+(SCF) Anapole moment w.r.t. C = (0, 0, 0):
+(SCF)     a_x = 3.299965800097733e-14
+(SCF)     a_y = -0.01710939824819728
+(SCF)     a_z = 6.620404759760638e-16
+(SCF) Hellmann-Feynman forces:
+(SCF) H-F force on H at pos = (0, 0.7572, -0.4692):   F = (4.342528636965894e-15, 4.745284409331871, -3.433108144400393)
+(SCF) H-F force on H at pos = (0, -0.7572, -0.4692):   F = (9.624847144213484e-15, -4.745284409331934, -3.433108144400434)
+(SCF) H-F force on O at pos = (0, 0, 0.1173):   F = (-1.942657382274761e-13, -6.900888792745981e-14, 6.399462397182842)
+(SCF) Total H-F force on center of mass:   Ftot = (-1.802983624462967e-13, -1.320695557261687e-13, -0.4667538916179845)
+(SCF) Scaling pressure w.r.t. center of charge:   11.18844280881115
+(SCF) Total H-F torque w.r.t. center of charge: (2.256464885642719e-15, -1.189763788465526e-14, 3.999771573686081e-15)
+(SCF) Nuclear shielding integrals:
+(SCF) H at C = (0, 0.7572, -0.4692):
+(SCF)    <Lx/|r - C|^3> = 0.04664552478890296
+(SCF)    <Ly/|r - C|^3> = -1.358636786816097e-14
+(SCF)    <Lz/|r - C|^3> = -1.276980420347437e-14
+(SCF) H at C = (0, -0.7572, -0.4692):
+(SCF)    <Lx/|r - C|^3> = 0.04664552478890389
+(SCF)    <Ly/|r - C|^3> = 5.077316810152569e-14
+(SCF)    <Lz/|r - C|^3> = 1.74173752323345e-14
+(SCF) O at C = (0, 0, 0.1173):
+(SCF)    <Lx/|r - C|^3> = 0.32268469377802
+(SCF)    <Ly/|r - C|^3> = 5.794698040229276e-13
+(SCF)    <Lz/|r - C|^3> = 3.798537421155034e-13
+ 
+MULLIKEN POPULATION ANALYSIS FOR SUM OF SPIN UP AND SPIN DOWN DENSITY MATRIX
+
+(SCF) Mulliken decomposition of traces of SCF 1-electron density matrix with simple operators
+
+(SCF) Mulliken populations:
+(SCF) Nucleus #1 (H):  0.2757923865962588   [narrow def.],   0.8470244029977827   [wide def.]
+(SCF) Nucleus #2 (H):  0.2757923865825941   [narrow def.],   0.8470244029724998   [wide def.]
+(SCF) Nucleus #3 (O):  7.361192968721521   [narrow def.],   8.305951194029708   [wide def.]
+
+(SCF) Total mechanical momentum: <pi> = (5.220474125892124e-14, -0.000333734197479253, -6.852700789225565e-16)
+
+(SCF) Mulliken momenta:
+(SCF) Nucleus #1 (H):  (8.185480158734485e-15, -0.0009709079213601561, 0.001496950404902153)   [narrow def.],   (2.273130276272488e-14, 0.002612378305664639, 0.005602511471910086)   [wide def.]
+(SCF) Nucleus #2 (H):  (1.208344115943759e-14, -0.0009709079212958897, -0.001496950404818187)   [narrow def.],   (5.909386612488042e-14, 0.002612378305881619, -0.005602511471806582)   [wide def.]
+(SCF) Nucleus #3 (O):  (-8.033145781632709e-14, -0.004099105319555085, -2.070308043832692e-13)   [narrow def.],   (-2.962042762868408e-14, -0.005558490809025528, -1.041831551584771e-13)   [wide def.]
+
+(SCF) Mulliken bond momenta:
+(SCF) Nucleus #1 (H):  Nuc. #2  (5.422608690895153e-15, 0.004312978971836372, -4.166856037184154e-14); Nuc. #3  (9.123213913095241e-15, -0.000729692744811577, 0.004105561067049602) 
+(SCF) Nucleus #2 (H):  Nuc. #1  (5.422608690895168e-15, 0.004312978971836369, -4.165942728592243e-14); Nuc. #3  (4.158781627454767e-14, -0.0007296927446588602, -0.004105561066946735) 
+(SCF) Nucleus #3 (O):  Nuc. #1  (9.1232139130952e-15, -0.0007296927448115783, 0.004105561067049604); Nuc. #2  (4.158781627454781e-14, -0.0007296927446588646, -0.004105561066946757) 
+ 
+MULLIKEN POPULATION ANALYSIS FOR SPIN DOWN DENSITY MATRIX:
+
+(SCF) Mulliken decomposition of traces of SCF 1-electron density matrix with simple operators
+
+(SCF) Mulliken populations:
+(SCF) Nucleus #1 (H):  0.137896193298719   [narrow def.],   0.4235122014995187   [wide def.]
+(SCF) Nucleus #2 (H):  0.1378961932907707   [narrow def.],   0.423512201485139   [wide def.]
+(SCF) Nucleus #3 (O):  3.680596484361853   [narrow def.],   4.152975597015342   [wide def.]
+
+(SCF) Total mechanical momentum: <pi> = (7.029341609790212e-15, -0.0001668670988588414, -4.011713027618544e-17)
+
+(SCF) Mulliken momenta:
+(SCF) Nucleus #1 (H):  (-3.528183186055592e-15, -0.0004854539607088156, 0.0007484752024625823)   [narrow def.],   (-4.521111739246631e-14, 0.001306189152665898, 0.002801255735933767)   [wide def.]
+(SCF) Nucleus #2 (H):  (1.594095691206587e-14, -0.0004854539606807502, -0.0007484752024181984)   [narrow def.],   (1.324366293372939e-13, 0.001306189152756605, -0.002801255735878238)   [wide def.]
+(SCF) Nucleus #3 (O):  (-1.441097562461448e-13, -0.002049552659325308, -1.137241381309321e-13)   [narrow def.],   (-8.019617033503726e-14, -0.002779245404281339, -5.557533599986897e-14)   [wide def.]
+
+(SCF) Mulliken bond momenta:
+(SCF) Nucleus #1 (H):  Nuc. #2  (5.449576153854868e-15, 0.002156489485884035, -2.351298291809692e-14); Nuc. #3  (-4.713251036026558e-14, -0.0003648463725093215, 0.002052780533494698) 
+(SCF) Nucleus #2 (H):  Nuc. #1  (5.449576153854881e-15, 0.002156489485884037, -2.350668842792496e-14); Nuc. #3  (1.110460962713732e-13, -0.0003648463724466819, -0.002052780533436533) 
+(SCF) Nucleus #3 (O):  Nuc. #1  (-4.713251036026559e-14, -0.0003648463725093324, 0.002052780533494698); Nuc. #2  (1.110460962713731e-13, -0.0003648463724466982, -0.002052780533436549) 
+ 
+MULLIKEN POPULATION ANALYSIS FOR SPIN UP DENSITY MATRIX:
+
+(SCF) Mulliken decomposition of traces of SCF 1-electron density matrix with simple operators
+
+(SCF) Mulliken populations:
+(SCF) Nucleus #1 (H):  0.1378961932975398   [narrow def.],   0.4235122014982644   [wide def.]
+(SCF) Nucleus #2 (H):  0.1378961932918235   [narrow def.],   0.423512201487361   [wide def.]
+(SCF) Nucleus #3 (O):  3.680596484359671   [narrow def.],   4.152975597014371   [wide def.]
+
+(SCF) Total mechanical momentum: <pi> = (4.517539964913121e-14, -0.000166867098620441, -6.342770456036256e-16)
+
+(SCF) Mulliken momenta:
+(SCF) Nucleus #1 (H):  (1.171366334479008e-14, -0.0004854539606513407, 0.0007484752024395698)   [narrow def.],   (6.794242015519123e-14, 0.001306189152998736, 0.00280125573597632)   [wide def.]
+(SCF) Nucleus #2 (H):  (-3.857515752628277e-15, -0.0004854539606151394, -0.0007484752023999886)   [narrow def.],   (-7.33427632124133e-14, 0.001306189153125018, -0.002801255735928344)   [wide def.]
+(SCF) Nucleus #3 (O):  (6.377829842981772e-14, -0.00204955266022978, -9.330666625233708e-14)   [narrow def.],   (5.057574270635321e-14, -0.002779245404744191, -4.861085492469108e-14)   [wide def.]
+
+(SCF) Mulliken bond momenta:
+(SCF) Nucleus #1 (H):  Nuc. #2  (-2.696746295971479e-17, 0.002156489485952332, -1.81557976823109e-14); Nuc. #3  (5.625572427336086e-14, -0.0003648463723022558, 0.002052780533554906) 
+(SCF) Nucleus #2 (H):  Nuc. #1  (-2.696746295971662e-17, 0.002156489485952334, -1.815267787162526e-14); Nuc. #3  (-6.94582799968253e-14, -0.0003648463722121768, -0.002052780533510203) 
+(SCF) Nucleus #3 (O):  Nuc. #1  (5.625572427336079e-14, -0.0003648463723022454, 0.002052780533554904); Nuc. #2  (-6.94582799968253e-14, -0.000364846372212166, -0.002052780533510208) 
+ 
+
+Orbital symmetry properties for SCF:
+                          Inversion           Rot180X           Rot180Y           Rot180Z            ReflXY            ReflXZ            ReflYZ
+  can.orb. [Down] 0   (0.6528,0.0000)   (0.6528,0.0000)   (0.6528,-0.0000)   (1.0000,0.0000)   (0.6528,-0.0000)   (1.0000,0.0000)   (1.0000,0.0000) 
+  can.orb. [Down] 1   (0.7352,-0.0000)   (0.7352,-0.0000)   (0.7355,0.0000)   (0.9998,0.0000)   (0.7355,0.0000)   (0.9998,0.0000)   (1.0000,0.0000) 
+  can.orb. [Down] 2   (-0.9760,0.0000)   (-0.9760,0.0000)   (0.9740,0.0000)   (-0.9950,-0.0000)   (0.9740,0.0000)   (-0.9950,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [Down] 3   (-0.6952,-0.0000)   (-0.6952,-0.0000)   (-0.6907,-0.0000)   (0.9953,0.0000)   (-0.6907,-0.0000)   (0.9953,0.0000)   (1.0000,0.0000) 
+  can.orb. [Down] 4   (-0.9911,0.0000)   (0.9911,-0.0000)   (-0.9911,0.0000)   (-1.0000,-0.0000)   (0.9911,-0.0000)   (1.0000,0.0000)   (-1.0000,-0.0000) 
+  can.orb. [Down] 5   (0.5294,0.0000)   (0.5294,0.0000)   (0.8016,-0.0000)   (0.7127,-0.0000)   (0.8016,-0.0000)   (0.7127,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [Down] 6   (-0.5074,-0.0000)   (-0.5074,-0.0000)   (0.7867,0.0000)   (-0.3991,0.0000)   (0.7867,0.0000)   (-0.3991,0.0000)   (1.0000,-0.0000) 
+  can.orb. [Down] 7   (-0.4312,0.0000)   (-0.4312,0.0000)   (-0.2840,-0.0000)   (0.8518,0.0000)   (-0.2840,-0.0000)   (0.8518,0.0000)   (1.0000,0.0000) 
+  can.orb. [Down] 8   (-0.9431,-0.0000)   (0.9431,0.0000)   (-0.9430,-0.0000)   (-0.9999,0.0000)   (0.9430,0.0000)   (0.9999,-0.0000)   (-1.0000,0.0000) 
+  can.orb. [Down] 9   (-0.6588,0.0000)   (-0.6588,0.0000)   (0.7389,0.0000)   (-0.6414,-0.0000)   (0.7389,0.0000)   (-0.6414,-0.0000)   (1.0000,0.0000) 
+  can.orb. [Down] 10   (0.3617,-0.0000)   (0.3617,-0.0000)   (0.5199,-0.0000)   (0.7501,-0.0000)   (0.5199,-0.0000)   (0.7501,-0.0000)   (1.0000,0.0000) 
+  can.orb. [Down] 11   (0.5553,0.0000)   (0.5553,0.0000)   (-0.0140,0.0000)   (-0.3395,-0.0000)   (-0.0140,0.0000)   (-0.3395,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [Down] 12   (0.8829,0.0000)   (-0.8829,-0.0000)   (-0.8615,-0.0000)   (0.9331,0.0000)   (0.8615,0.0000)   (-0.9331,-0.0000)   (-1.0000,0.0000) 
+  can.orb. [Down] 13   (0.8051,0.0000)   (0.8051,0.0000)   (0.4808,0.0000)   (0.4178,-0.0000)   (0.4808,0.0000)   (0.4178,-0.0000)   (1.0000,0.0000) 
+  can.orb. [Down] 14   (-0.1874,0.0000)   (-0.1874,0.0000)   (-0.1673,0.0000)   (0.9029,-0.0000)   (-0.1673,0.0000)   (0.9029,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [Down] 15   (-0.3301,-0.0000)   (0.3301,0.0000)   (-0.3759,-0.0000)   (-0.9433,-0.0000)   (0.3759,0.0000)   (0.9433,0.0000)   (-1.0000,0.0000) 
+  can.orb. [Down] 16   (-0.6013,0.0000)   (-0.6013,0.0000)   (0.5853,-0.0000)   (-0.9439,0.0000)   (0.5853,-0.0000)   (-0.9439,0.0000)   (1.0000,0.0000) 
+  can.orb. [Down] 17   (0.7466,0.0000)   (0.7466,0.0000)   (0.8190,0.0000)   (0.9151,-0.0000)   (0.8190,0.0000)   (0.9151,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [Down] 18   (-0.5212,0.0000)   (-0.5212,0.0000)   (0.6091,-0.0000)   (-0.8666,-0.0000)   (0.6091,-0.0000)   (-0.8666,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [Down] 19   (0.2488,-0.0000)   (0.2488,-0.0000)   (0.2546,-0.0000)   (0.9864,-0.0000)   (0.2546,-0.0000)   (0.9864,-0.0000)   (1.0000,0.0000) 
+
+
+
+Orbital properties for SCF:
+                           Lcoord_x          Lcoord_y          Lcoord_z               x^2               y^2               z^2
+  can.orb. [Down] 0   (-0.0000,-0.0000)   (0.0000,0.0000)   (-0.0000,0.0000)   (0.0179,0.0000)   (0.0179,-0.0000)   (0.0314,0.0000) 
+  can.orb. [Down] 1   (-0.0086,0.0000)   (-0.0000,0.0000)   (-0.0000,0.0000)   (0.3500,0.0000)   (0.4927,0.0000)   (0.4220,-0.0000) 
+  can.orb. [Down] 2   (-0.0832,-0.0000)   (-0.0000,0.0000)   (-0.0000,0.0000)   (0.2620,0.0000)   (0.9028,0.0000)   (0.3048,0.0000) 
+  can.orb. [Down] 3   (0.0866,-0.0000)   (-0.0000,-0.0000)   (0.0000,0.0000)   (0.4623,-0.0000)   (0.4740,0.0000)   (1.1448,-0.0000) 
+  can.orb. [Down] 4   (-0.0001,0.0000)   (0.0000,0.0000)   (0.0000,0.0000)   (1.2609,0.0000)   (0.4451,0.0000)   (0.4337,-0.0000) 
+  can.orb. [Down] 5   (-0.2307,-0.0000)   (0.0000,0.0000)   (0.0000,0.0000)   (13.2021,0.0000)   (16.4954,0.0000)   (15.6695,0.0000) 
+  can.orb. [Down] 6   (-0.5155,0.0000)   (-0.0000,-0.0000)   (-0.0000,-0.0000)   (12.1157,-0.0000)   (30.0569,0.0000)   (13.5866,0.0000) 
+  can.orb. [Down] 7   (0.3360,0.0000)   (-0.0000,0.0000)   (0.0000,0.0000)   (8.2417,-0.0000)   (9.3629,-0.0000)   (14.6815,-0.0000) 
+  can.orb. [Down] 8   (-0.0011,0.0000)   (0.0000,0.0000)   (-0.0000,-0.0000)   (15.7505,-0.0000)   (4.8133,-0.0000)   (5.2257,-0.0000) 
+  can.orb. [Down] 9   (-0.1663,0.0000)   (-0.0000,-0.0000)   (0.0000,0.0000)   (7.4680,-0.0000)   (19.2768,-0.0000)   (10.9295,0.0000) 
+  can.orb. [Down] 10   (-0.2379,-0.0000)   (-0.0000,-0.0000)   (-0.0000,0.0000)   (8.7423,0.0000)   (12.3273,0.0000)   (12.3821,0.0000) 
+  can.orb. [Down] 11   (-1.7378,-0.0000)   (-0.0000,0.0000)   (-0.0000,0.0000)   (2.6767,0.0000)   (7.7796,-0.0000)   (6.3116,0.0000) 
+  can.orb. [Down] 12   (-0.3104,0.0000)   (0.0000,0.0000)   (-0.0000,-0.0000)   (5.9363,0.0000)   (6.1711,0.0000)   (2.3657,0.0000) 
+  can.orb. [Down] 13   (1.3964,-0.0000)   (-0.0000,-0.0000)   (0.0000,-0.0000)   (3.5762,-0.0000)   (7.7388,0.0000)   (4.5044,-0.0000) 
+  can.orb. [Down] 14   (0.2676,-0.0000)   (-0.0000,-0.0000)   (-0.0000,0.0000)   (5.5706,-0.0000)   (4.8525,-0.0000)   (8.7882,-0.0000) 
+  can.orb. [Down] 15   (0.1655,0.0000)   (0.0000,-0.0000)   (0.0000,0.0000)   (8.3121,0.0000)   (3.3145,0.0000)   (4.0322,0.0000) 
+  can.orb. [Down] 16   (-0.1656,0.0000)   (-0.0000,0.0000)   (-0.0000,-0.0000)   (4.3992,-0.0000)   (12.7001,0.0000)   (6.1185,0.0000) 
+  can.orb. [Down] 17   (-0.2393,0.0000)   (0.0000,0.0000)   (0.0000,0.0000)   (6.8535,-0.0000)   (7.0613,-0.0000)   (7.2853,0.0000) 
+  can.orb. [Down] 18   (-0.4165,-0.0000)   (0.0000,-0.0000)   (-0.0000,-0.0000)   (4.2584,-0.0000)   (7.4691,-0.0000)   (4.4850,0.0000) 
+  can.orb. [Down] 19   (0.0228,0.0000)   (0.0000,-0.0000)   (0.0000,0.0000)   (2.0355,-0.0000)   (1.5699,0.0000)   (4.8493,-0.0000) 
+
+
+
+Orbital symmetry properties for SCF:
+                          Inversion           Rot180X           Rot180Y           Rot180Z            ReflXY            ReflXZ            ReflYZ
+  can.orb. [ Up ] 0   (0.6528,0.0000)   (0.6528,0.0000)   (0.6528,0.0000)   (1.0000,0.0000)   (0.6528,0.0000)   (1.0000,0.0000)   (1.0000,-0.0000) 
+  can.orb. [ Up ] 1   (0.7352,0.0000)   (0.7352,0.0000)   (0.7355,-0.0000)   (0.9998,0.0000)   (0.7355,-0.0000)   (0.9998,0.0000)   (1.0000,0.0000) 
+  can.orb. [ Up ] 2   (-0.9760,0.0000)   (-0.9760,0.0000)   (0.9740,-0.0000)   (-0.9950,-0.0000)   (0.9740,-0.0000)   (-0.9950,-0.0000)   (1.0000,0.0000) 
+  can.orb. [ Up ] 3   (-0.6952,-0.0000)   (-0.6952,-0.0000)   (-0.6907,-0.0000)   (0.9953,-0.0000)   (-0.6907,-0.0000)   (0.9953,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [ Up ] 4   (-0.9911,0.0000)   (0.9911,-0.0000)   (-0.9911,0.0000)   (-1.0000,-0.0000)   (0.9911,-0.0000)   (1.0000,0.0000)   (-1.0000,-0.0000) 
+  can.orb. [ Up ] 5   (0.5294,0.0000)   (0.5294,0.0000)   (0.8016,0.0000)   (0.7127,-0.0000)   (0.8016,0.0000)   (0.7127,-0.0000)   (1.0000,0.0000) 
+  can.orb. [ Up ] 6   (-0.5074,-0.0000)   (-0.5074,-0.0000)   (0.7867,-0.0000)   (-0.3991,0.0000)   (0.7867,-0.0000)   (-0.3991,0.0000)   (1.0000,-0.0000) 
+  can.orb. [ Up ] 7   (-0.4312,0.0000)   (-0.4312,0.0000)   (-0.2840,0.0000)   (0.8518,-0.0000)   (-0.2840,0.0000)   (0.8518,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [ Up ] 8   (-0.9431,0.0000)   (0.9431,-0.0000)   (-0.9430,0.0000)   (-0.9999,0.0000)   (0.9430,-0.0000)   (0.9999,-0.0000)   (-1.0000,0.0000) 
+  can.orb. [ Up ] 9   (-0.6588,0.0000)   (-0.6588,0.0000)   (0.7389,-0.0000)   (-0.6414,0.0000)   (0.7389,-0.0000)   (-0.6414,0.0000)   (1.0000,-0.0000) 
+  can.orb. [ Up ] 10   (0.3617,-0.0000)   (0.3617,-0.0000)   (0.5199,0.0000)   (0.7501,-0.0000)   (0.5199,0.0000)   (0.7501,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [ Up ] 11   (0.5553,0.0000)   (0.5553,0.0000)   (-0.0140,0.0000)   (-0.3395,0.0000)   (-0.0140,0.0000)   (-0.3395,0.0000)   (1.0000,0.0000) 
+  can.orb. [ Up ] 12   (0.8829,-0.0000)   (-0.8829,0.0000)   (-0.8615,0.0000)   (0.9331,-0.0000)   (0.8615,-0.0000)   (-0.9331,0.0000)   (-1.0000,0.0000) 
+  can.orb. [ Up ] 13   (0.8051,0.0000)   (0.8051,0.0000)   (0.4808,0.0000)   (0.4178,0.0000)   (0.4808,0.0000)   (0.4178,0.0000)   (1.0000,0.0000) 
+  can.orb. [ Up ] 14   (-0.1874,0.0000)   (-0.1874,0.0000)   (-0.1673,-0.0000)   (0.9029,0.0000)   (-0.1673,-0.0000)   (0.9029,0.0000)   (1.0000,0.0000) 
+  can.orb. [ Up ] 15   (-0.3301,-0.0000)   (0.3301,0.0000)   (-0.3759,0.0000)   (-0.9433,-0.0000)   (0.3759,-0.0000)   (0.9433,0.0000)   (-1.0000,-0.0000) 
+  can.orb. [ Up ] 16   (-0.6013,-0.0000)   (-0.6013,-0.0000)   (0.5853,0.0000)   (-0.9439,-0.0000)   (0.5853,0.0000)   (-0.9439,-0.0000)   (1.0000,-0.0000) 
+  can.orb. [ Up ] 17   (0.7466,-0.0000)   (0.7466,-0.0000)   (0.8190,-0.0000)   (0.9151,-0.0000)   (0.8190,-0.0000)   (0.9151,-0.0000)   (1.0000,0.0000) 
+  can.orb. [ Up ] 18   (-0.5212,-0.0000)   (-0.5212,-0.0000)   (0.6091,-0.0000)   (-0.8666,0.0000)   (0.6091,-0.0000)   (-0.8666,0.0000)   (1.0000,0.0000) 
+  can.orb. [ Up ] 19   (0.2488,0.0000)   (0.2488,0.0000)   (0.2546,0.0000)   (0.9864,-0.0000)   (0.2546,0.0000)   (0.9864,-0.0000)   (1.0000,0.0000) 
+
+
+
+Orbital properties for SCF:
+                           Lcoord_x          Lcoord_y          Lcoord_z               x^2               y^2               z^2
+  can.orb. [ Up ] 0   (-0.0000,-0.0000)   (-0.0000,-0.0000)   (-0.0000,0.0000)   (0.0179,-0.0000)   (0.0179,-0.0000)   (0.0314,-0.0000) 
+  can.orb. [ Up ] 1   (-0.0086,0.0000)   (-0.0000,-0.0000)   (-0.0000,-0.0000)   (0.3500,0.0000)   (0.4927,-0.0000)   (0.4220,0.0000) 
+  can.orb. [ Up ] 2   (-0.0832,0.0000)   (-0.0000,-0.0000)   (-0.0000,0.0000)   (0.2620,0.0000)   (0.9028,-0.0000)   (0.3048,0.0000) 
+  can.orb. [ Up ] 3   (0.0866,0.0000)   (-0.0000,0.0000)   (0.0000,-0.0000)   (0.4623,-0.0000)   (0.4740,0.0000)   (1.1448,0.0000) 
+  can.orb. [ Up ] 4   (-0.0001,-0.0000)   (0.0000,0.0000)   (-0.0000,0.0000)   (1.2609,-0.0000)   (0.4451,-0.0000)   (0.4337,0.0000) 
+  can.orb. [ Up ] 5   (-0.2307,-0.0000)   (0.0000,0.0000)   (0.0000,0.0000)   (13.2021,0.0000)   (16.4954,-0.0000)   (15.6695,-0.0000) 
+  can.orb. [ Up ] 6   (-0.5155,-0.0000)   (-0.0000,-0.0000)   (-0.0000,-0.0000)   (12.1157,0.0000)   (30.0569,0.0000)   (13.5866,-0.0000) 
+  can.orb. [ Up ] 7   (0.3360,-0.0000)   (0.0000,-0.0000)   (-0.0000,0.0000)   (8.2417,0.0000)   (9.3629,0.0000)   (14.6815,0.0000) 
+  can.orb. [ Up ] 8   (-0.0011,-0.0000)   (-0.0000,0.0000)   (0.0000,-0.0000)   (15.7505,0.0000)   (4.8133,0.0000)   (5.2257,0.0000) 
+  can.orb. [ Up ] 9   (-0.1663,-0.0000)   (0.0000,0.0000)   (-0.0000,-0.0000)   (7.4680,-0.0000)   (19.2768,-0.0000)   (10.9295,-0.0000) 
+  can.orb. [ Up ] 10   (-0.2379,-0.0000)   (0.0000,0.0000)   (0.0000,-0.0000)   (8.7423,0.0000)   (12.3273,0.0000)   (12.3821,-0.0000) 
+  can.orb. [ Up ] 11   (-1.7378,-0.0000)   (-0.0000,0.0000)   (0.0000,0.0000)   (2.6767,-0.0000)   (7.7796,-0.0000)   (6.3116,0.0000) 
+  can.orb. [ Up ] 12   (-0.3104,-0.0000)   (-0.0000,0.0000)   (0.0000,-0.0000)   (5.9363,-0.0000)   (6.1711,0.0000)   (2.3657,-0.0000) 
+  can.orb. [ Up ] 13   (1.3964,0.0000)   (0.0000,0.0000)   (-0.0000,-0.0000)   (3.5762,-0.0000)   (7.7388,-0.0000)   (4.5044,-0.0000) 
+  can.orb. [ Up ] 14   (0.2676,-0.0000)   (0.0000,-0.0000)   (0.0000,0.0000)   (5.5706,0.0000)   (4.8525,0.0000)   (8.7882,-0.0000) 
+  can.orb. [ Up ] 15   (0.1655,0.0000)   (-0.0000,-0.0000)   (0.0000,0.0000)   (8.3121,0.0000)   (3.3145,0.0000)   (4.0322,-0.0000) 
+  can.orb. [ Up ] 16   (-0.1656,-0.0000)   (-0.0000,0.0000)   (-0.0000,-0.0000)   (4.3992,0.0000)   (12.7001,-0.0000)   (6.1185,-0.0000) 
+  can.orb. [ Up ] 17   (-0.2393,-0.0000)   (0.0000,0.0000)   (0.0000,-0.0000)   (6.8535,0.0000)   (7.0613,0.0000)   (7.2853,-0.0000) 
+  can.orb. [ Up ] 18   (-0.4165,-0.0000)   (0.0000,-0.0000)   (-0.0000,0.0000)   (4.2584,-0.0000)   (7.4691,0.0000)   (4.4850,0.0000) 
+  can.orb. [ Up ] 19   (0.0228,-0.0000)   (0.0000,-0.0000)   (0.0000,0.0000)   (2.0355,0.0000)   (1.5699,0.0000)   (4.8493,-0.0000) 
+
+
+RSP: done run scf2
+Number of alpha MOs = 5
+Number of beta  MOs = 5
+
+
+RSP: Hartree-Fock orbitals have been obtained. 
+RSP: Hartree-Fock final energy = -74.59942802121566
+Entering response module
+No. of electrons: (9.999999999999609,-7.8540386030319e-14)
+DevINFO: screened away 360 out of 231601 symmetry unique quadruples ABCD.
+Recomputed final SCF electronic energy (-91.96513004561653,-1.170533142994317e-13) (-49.05416057150308,-1.169306451604647e-13) (42.91096947411346,1.226691389670506e-16)
+unit_vectors():   MO Single-transition excitations in total.
+Constructing start guesses for RPA-solver using the 100 lowest ones.
+(No spin mixing allowed for UHF excitation operator)
+(spin down)5 <- 4 : 0.6133507588883569
+(spin down)6 <- 4 : 0.6283213215907442
+(spin down)5 <- 3 : 0.7102579690128866
+(spin down)6 <- 3 : 0.7252285317152739
+(spin down)7 <- 4 : 0.7352870573160158
+(spin down)8 <- 4 : 0.7442315247440845
+(spin down)9 <- 4 : 0.7728107004322573
+(spin down)10 <- 4 : 0.7953715551949834
+(spin down)7 <- 3 : 0.8321942674405456
+(spin down)8 <- 3 : 0.8411387348686142
+(spin down)9 <- 3 : 0.869717910556787
+(spin down)10 <- 3 : 0.8922787653195131
+(spin down)11 <- 4 : 0.9170449313130365
+(spin down)12 <- 4 : 0.9815456174814093
+(spin down)13 <- 4 : 0.9945347227213583
+(spin down)11 <- 3 : 1.013952141437566
+(spin down)14 <- 4 : 1.033903496050689
+(spin down)12 <- 3 : 1.078452827605939
+(spin down)15 <- 4 : 1.081915852264052
+(spin down)5 <- 2 : 1.086697712621602
+(spin down)13 <- 3 : 1.091441932845888
+(spin down)6 <- 2 : 1.101668275323989
+(spin down)16 <- 4 : 1.124805250992308
+(spin down)14 <- 3 : 1.130810706175219
+(spin down)17 <- 4 : 1.15602754455504
+(spin down)15 <- 3 : 1.178823062388582
+(spin down)18 <- 4 : 1.193203985945677
+(spin down)7 <- 2 : 1.208634011049261
+(spin down)8 <- 2 : 1.21757847847733
+(spin down)16 <- 3 : 1.221712461116838
+(spin down)9 <- 2 : 1.246157654165502
+(spin down)17 <- 3 : 1.25293475467957
+(spin down)10 <- 2 : 1.268718508928228
+(spin down)18 <- 3 : 1.290111196070207
+(spin down)11 <- 2 : 1.390391885046282
+(spin down)12 <- 2 : 1.454892571214655
+(spin down)13 <- 2 : 1.467881676454604
+(spin down)14 <- 2 : 1.507250449783934
+(spin down)19 <- 4 : 1.554512437693355
+(spin down)15 <- 2 : 1.555262805997297
+(spin down)16 <- 2 : 1.598152204725553
+(spin down)20 <- 4 : 1.599531568161441
+(spin down)17 <- 2 : 1.629374498288285
+(spin down)19 <- 3 : 1.651419647817884
+(spin down)18 <- 2 : 1.666550939678922
+(spin down)21 <- 4 : 1.690963894508025
+(spin down)20 <- 3 : 1.69643877828597
+(spin down)22 <- 4 : 1.729754085469439
+(spin down)5 <- 1 : 1.76814153290205
+(spin down)23 <- 4 : 1.779402584146639
+(spin down)6 <- 1 : 1.783112095604437
+(spin down)21 <- 3 : 1.787871104632554
+(spin down)24 <- 4 : 1.788478323384316
+(spin down)22 <- 3 : 1.826661295593969
+(spin down)23 <- 3 : 1.876309794271169
+(spin down)24 <- 3 : 1.885385533508846
+(spin down)25 <- 4 : 1.888341778276021
+(spin down)7 <- 1 : 1.890077831329709
+(spin down)8 <- 1 : 1.899022298757778
+(spin down)9 <- 1 : 1.927601474445951
+(spin down)10 <- 1 : 1.950162329208676
+(spin down)26 <- 4 : 1.971947029669292
+(spin down)25 <- 3 : 1.98524898840055
+(spin down)19 <- 2 : 2.0278593914266
+(spin down)26 <- 3 : 2.068854239793822
+(spin down)11 <- 1 : 2.07183570532673
+(spin down)20 <- 2 : 2.072878521894686
+(spin down)27 <- 4 : 2.086225234222586
+(spin down)12 <- 1 : 2.136336391495103
+(spin down)13 <- 1 : 2.149325496735051
+(spin down)21 <- 2 : 2.16431084824127
+(spin down)27 <- 3 : 2.183132444347116
+(spin down)14 <- 1 : 2.188694270064382
+(spin down)22 <- 2 : 2.203101039202684
+(spin down)15 <- 1 : 2.236706626277745
+(spin down)23 <- 2 : 2.252749537879884
+(spin down)24 <- 2 : 2.261825277117561
+(spin down)16 <- 1 : 2.279596025006001
+(spin down)17 <- 1 : 2.310818318568733
+(spin down)18 <- 1 : 2.34799475995937
+(spin down)25 <- 2 : 2.361688732009266
+(spin down)26 <- 2 : 2.445293983402537
+(spin down)28 <- 4 : 2.516797178742466
+(spin down)27 <- 2 : 2.559572187955831
+(spin down)28 <- 3 : 2.613704388866996
+(spin down)29 <- 4 : 2.64840755186996
+(spin down)19 <- 1 : 2.709303211707048
+(spin down)29 <- 3 : 2.745314761994489
+(spin down)20 <- 1 : 2.754322342175134
+(spin down)21 <- 1 : 2.845754668521718
+(spin down)22 <- 1 : 2.884544859483132
+(spin down)23 <- 1 : 2.934193358160332
+(spin down)24 <- 1 : 2.94326909739801
+(spin down)28 <- 2 : 2.990144132475711
+(spin down)30 <- 4 : 3.004383103515205
+(spin down)25 <- 1 : 3.043132552289713
+(spin down)30 <- 3 : 3.101290313639734
+(spin down)29 <- 2 : 3.121754505603205
+(spin down)26 <- 1 : 3.126737803682985
+(spin down)31 <- 4 : 3.201558330215278
+(spin up)5 <- 4 : 0.6133507588888132
+(spin up)6 <- 4 : 0.6283213215912852
+(spin up)5 <- 3 : 0.7102579690155408
+(spin up)6 <- 3 : 0.7252285317180127
+(spin up)7 <- 4 : 0.7352870573163934
+(spin up)8 <- 4 : 0.7442315247446589
+(spin up)9 <- 4 : 0.7728107004328806
+(spin up)10 <- 4 : 0.7953715551953608
+(spin up)7 <- 3 : 0.832194267443121
+(spin up)8 <- 3 : 0.8411387348713865
+(spin up)9 <- 3 : 0.8697179105596081
+(spin up)10 <- 3 : 0.8922787653220884
+(spin up)11 <- 4 : 0.9170449313132416
+(spin up)12 <- 4 : 0.9815456174820396
+(spin up)13 <- 4 : 0.9945347227218102
+(spin up)11 <- 3 : 1.013952141439969
+(spin up)14 <- 4 : 1.03390349605116
+(spin up)12 <- 3 : 1.078452827608767
+(spin up)15 <- 4 : 1.081915852264611
+(spin up)5 <- 2 : 1.086697712620575
+(spin up)13 <- 3 : 1.091441932848538
+(spin up)6 <- 2 : 1.101668275323047
+(spin up)16 <- 4 : 1.124805250992219
+(spin up)14 <- 3 : 1.130810706177888
+(spin up)17 <- 4 : 1.156027544554357
+(spin up)15 <- 3 : 1.178823062391339
+(spin up)18 <- 4 : 1.193203985943684
+(spin up)7 <- 2 : 1.208634011048155
+(spin up)8 <- 2 : 1.217578478476421
+(spin up)16 <- 3 : 1.221712461118947
+(spin up)9 <- 2 : 1.246157654164642
+(spin up)17 <- 3 : 1.252934754681084
+(spin up)10 <- 2 : 1.268718508927123
+(spin up)18 <- 3 : 1.290111196070411
+(spin up)11 <- 2 : 1.390391885045004
+(spin up)12 <- 2 : 1.454892571213801
+(spin up)13 <- 2 : 1.467881676453572
+(spin up)14 <- 2 : 1.507250449782922
+(spin up)19 <- 4 : 1.554512437693708
+(spin up)15 <- 2 : 1.555262805996373
+(spin up)16 <- 2 : 1.598152204723981
+(spin up)20 <- 4 : 1.599531568162081
+(spin up)17 <- 2 : 1.629374498286118
+(spin up)19 <- 3 : 1.651419647820436
+(spin up)18 <- 2 : 1.666550939675446
+(spin up)21 <- 4 : 1.690963894508722
+(spin up)20 <- 3 : 1.696438778288808
+(spin up)22 <- 4 : 1.729754085469831
+(spin up)5 <- 1 : 1.768141532903898
+(spin up)23 <- 4 : 1.779402584147265
+(spin up)6 <- 1 : 1.78311209560637
+(spin up)21 <- 3 : 1.78787110463545
+(spin up)24 <- 4 : 1.788478323384566
+(spin up)22 <- 3 : 1.826661295596558
+(spin up)23 <- 3 : 1.876309794273993
+(spin up)24 <- 3 : 1.885385533511293
+(spin up)25 <- 4 : 1.888341778275316
+(spin up)7 <- 1 : 1.890077831331478
+(spin up)8 <- 1 : 1.899022298759743
+(spin up)9 <- 1 : 1.927601474447965
+(spin up)10 <- 1 : 1.950162329210445
+(spin up)26 <- 4 : 1.971947029669744
+(spin up)25 <- 3 : 1.985248988402043
+(spin up)19 <- 2 : 2.02785939142547
+(spin up)26 <- 3 : 2.068854239796472
+(spin up)11 <- 1 : 2.071835705328326
+(spin up)20 <- 2 : 2.072878521893843
+(spin up)27 <- 4 : 2.086225234223203
+(spin up)12 <- 1 : 2.136336391497124
+(spin up)13 <- 1 : 2.149325496736894
+(spin up)21 <- 2 : 2.164310848240484
+(spin up)27 <- 3 : 2.183132444349931
+(spin up)14 <- 1 : 2.188694270066245
+(spin up)22 <- 2 : 2.203101039201593
+(spin up)15 <- 1 : 2.236706626279696
+(spin up)23 <- 2 : 2.252749537879027
+(spin up)24 <- 2 : 2.261825277116328
+(spin up)16 <- 1 : 2.279596025007304
+(spin up)17 <- 1 : 2.310818318569441
+(spin up)18 <- 1 : 2.347994759958768
+(spin up)25 <- 2 : 2.361688732007078
+(spin up)26 <- 2 : 2.445293983401506
+(spin up)28 <- 4 : 2.516797178743094
+(spin up)27 <- 2 : 2.559572187954965
+(spin up)28 <- 3 : 2.613704388869822
+(spin up)29 <- 4 : 2.648407551870683
+(spin up)19 <- 1 : 2.709303211708793
+(spin up)29 <- 3 : 2.745314761997411
+(spin up)20 <- 1 : 2.754322342177165
+(spin up)21 <- 1 : 2.845754668523806
+(spin up)22 <- 1 : 2.884544859484915
+(spin up)23 <- 1 : 2.934193358162349
+(spin up)24 <- 1 : 2.94326909739965
+(spin up)28 <- 2 : 2.990144132474857
+(spin up)30 <- 4 : 3.004383103515825
+(spin up)25 <- 1 : 3.0431325522904
+(spin up)30 <- 3 : 3.101290313642552
+(spin up)29 <- 2 : 3.121754505602444
+(spin up)26 <- 1 : 3.126737803684828
+(spin up)31 <- 4 : 3.201558330215691
+Made 200 starting vectors 
+DevINFO: screened away 28391 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27699 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 952 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 958 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27664 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 113145 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25588 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25997 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 862 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27908 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 777 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 738 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 26993 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 111957 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27221 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 860 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25521 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 28324 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 109243 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 980 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 885 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 1034 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25278 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 762 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24633 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27238 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25271 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 922 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 29864 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 701 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 863 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 651 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 785 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 793 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 965 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 30260 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 960 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 887 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24838 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 29315 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 933 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 114689 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 665 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 676 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 871 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25758 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 30108 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25304 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 786 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 105712 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 790 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 729 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24291 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 730 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24858 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 638 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23985 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 685 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25604 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 640 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 618 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24225 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 563 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 758 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 534 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 730 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 31873 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 105556 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 26203 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 737 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 860 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27739 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 595 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 822 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25026 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27391 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 861 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 517 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 525 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 656 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 752 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 561 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24879 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 29582 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 659 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 26442 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 521 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 590 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27945 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 565 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 555 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 22600 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 488 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 920 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 108144 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 432 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 28270 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 894 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 449 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 26952 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25926 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25367 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 952 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 958 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25330 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 108375 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23461 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23594 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 862 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27656 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 777 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 738 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24779 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 107461 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24873 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 860 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23318 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 28454 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 102624 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 980 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 885 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 1034 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23164 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 762 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 22441 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25465 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23109 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 922 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 29385 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 701 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 863 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 651 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 785 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 793 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 965 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 30416 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 960 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 887 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 22575 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27729 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 933 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 109099 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 665 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 676 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 871 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23485 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 30895 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23033 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 786 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 101619 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 790 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 729 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 22122 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 730 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24399 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 638 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 21862 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 685 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 25351 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 640 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 618 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 22110 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 563 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 758 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 534 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 730 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 32662 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 98774 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 26336 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 737 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 860 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27298 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 595 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 822 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 23345 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 26894 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 861 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 517 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 525 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 656 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 752 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 561 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 22542 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 29343 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 659 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24183 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 521 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 590 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 28749 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 565 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 555 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 22166 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 488 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 920 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 104157 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 432 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 28144 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 894 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 449 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24529 out of 231601 symmetry unique quadruples ABCD.
+The Davidson solver is about to start.
+-------
+Davidson step #0, 400 RPA trial vectors already in subspace.
+DevINFO: screened away 9182 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 9045 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 7904 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 7336 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 416 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 353 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #1, 412 RPA trial vectors already in subspace.
+DevINFO: screened away 3674 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 3503 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 2563 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 2469 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 60 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 33 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #2, 424 RPA trial vectors already in subspace.
+DevINFO: screened away 647 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 753 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 512 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 580 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 74 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 48 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #3, 436 RPA trial vectors already in subspace.
+DevINFO: screened away 253 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 291 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 222 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 218 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 122 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 96 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #4, 448 RPA trial vectors already in subspace.
+DevINFO: screened away 72 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 91 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 69 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 95 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 113 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 95 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #5, 460 RPA trial vectors already in subspace.
+DevINFO: screened away 28 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 28 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 76 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 102 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 47 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 48 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #6, 472 RPA trial vectors already in subspace.
+DevINFO: screened away 28 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 87 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 30 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 36 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 38 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 59 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #7, 484 RPA trial vectors already in subspace.
+DevINFO: screened away 30 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 24 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 39 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 27 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 60 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 77 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #8, 496 RPA trial vectors already in subspace.
+DevINFO: screened away 118 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 120 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 90 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 116 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 97 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 110 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #9, 508 RPA trial vectors already in subspace.
+DevINFO: screened away 74 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 79 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 82 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 90 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 119 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 131 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #10, 520 RPA trial vectors already in subspace.
+DevINFO: screened away 120 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 113 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 112 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 124 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 121 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 130 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #11, 532 RPA trial vectors already in subspace.
+DevINFO: screened away 135 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 156 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 152 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 158 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 183 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 169 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #12, 544 RPA trial vectors already in subspace.
+DevINFO: screened away 150 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 139 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 189 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 184 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 153 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 171 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #13, 556 RPA trial vectors already in subspace.
+DevINFO: screened away 183 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 209 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 209 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 228 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 182 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 184 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #14, 568 RPA trial vectors already in subspace.
+DevINFO: screened away 211 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 168 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 198 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 196 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 194 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 201 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #15, 580 RPA trial vectors already in subspace.
+DevINFO: screened away 198 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 192 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 201 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 187 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 199 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 182 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #16, 592 RPA trial vectors already in subspace.
+DevINFO: screened away 191 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 203 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 203 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 204 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 198 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 192 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #17, 604 RPA trial vectors already in subspace.
+DevINFO: screened away 193 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 199 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 205 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 212 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 215 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 208 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #18, 616 RPA trial vectors already in subspace.
+DevINFO: screened away 221 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 200 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 216 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 200 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 200 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 200 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #19, 628 RPA trial vectors already in subspace.
+DevINFO: screened away 223 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 181 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 217 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 201 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 222 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 212 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #20, 640 RPA trial vectors already in subspace.
+DevINFO: screened away 221 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 192 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 223 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 212 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 220 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 242 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #21, 652 RPA trial vectors already in subspace.
+DevINFO: screened away 263 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 235 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 252 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 227 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 231 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #22, 662 RPA trial vectors already in subspace.
+DevINFO: screened away 226 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 236 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 237 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #23, 668 RPA trial vectors already in subspace.
+DevINFO: screened away 226 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 221 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #24, 672 RPA trial vectors already in subspace.
+DevINFO: screened away 201 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 209 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #25, 676 RPA trial vectors already in subspace.
+DevINFO: screened away 179 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 172 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #26, 680 RPA trial vectors already in subspace.
+DevINFO: screened away 202 out of 231601 symmetry unique quadruples ABCD.
+DevINFO: screened away 164 out of 231601 symmetry unique quadruples ABCD.
+-------
+Davidson step #27, 684 RPA trial vectors already in subspace.
+The Davidson solver converged to a solution. 28 iterations and 0 restarts were needed.
+==============================================================================================================
+The Final eigenvalues from the Davidson method
+==============================================================================================================
+(RSP) 	 Excitation Energy 	0.3893811121259152	0.4046156844568002	0.4519063532683765	0.4559355033919573	0.4705879186830402	0.503718966911207	
+==============================================================================================================
+Root: 0	 with energy 0.3893811121259152
+==============================================================================================================
+5 Up <-- Up 4 C^2 :  0.3266398157193772 C : (0.1716939493996297,-0.5451247595357733)
+5 Down <-- Down 4 C^2 :  0.326639814752729 C : (-0.157484517888487,0.5493982538907091)
+==============================================================================================================
+Root: 1	 with energy 0.4046156844568002
+==============================================================================================================
+5 Up <-- Up 4 C^2 :  0.3634445540822972 C : (0.3763218265942406,-0.4709845399915707)
+5 Down <-- Down 4 C^2 :  0.3634445534918629 C : (0.3639681279343453,-0.4805952094432809)
+==============================================================================================================
+Root: 2	 with energy 0.4519063532683765
+==============================================================================================================
+6 Up <-- Up 4 C^2 :  0.3641568523553512 C : (-0.07894377968483011,0.598268110469231)
+6 Down <-- Down 4 C^2 :  0.3641568527764307 C : (-0.06338599297779648,0.600115879368851)
+==============================================================================================================
+Root: 3	 with energy 0.4559355033919573
+==============================================================================================================
+6 Up <-- Up 4 C^2 :  0.3877986747674576 C : (0.04652774047228765,-0.6209942384064454)
+6 Down <-- Down 4 C^2 :  0.38779867319594 C : (-0.03039090155368619,0.6219928185266244)
+==============================================================================================================
+Root: 4	 with energy 0.4705879186830402
+==============================================================================================================
+8 Up <-- Up 4 C^2 :  0.3364012195483171 C : (-0.5504364416562654,0.1828139580149884)
+8 Down <-- Down 4 C^2 :  0.3364012192858259 C : (-0.5113397011271003,0.2737387976467233)
+==============================================================================================================
+Root: 5	 with energy 0.503718966911207
+==============================================================================================================
+5 Up <-- Up 3 C^2 :  0.2558331958176072 C : (0.3413645006608982,-0.3732338054171175)
+5 Down <-- Down 3 C^2 :  0.2558331176011615 C : (-0.3413644779868101,0.3732337213730212)
+8 Up <-- Up 4 C^2 :  0.1079942286910119 C : (-0.2268261556669833,0.2377900834693265)
+8 Down <-- Down 4 C^2 :  0.1079942340386403 C : (-0.1830939491562577,0.2728934587361997)
+==============================================================================================================
+==============================================================================================================
+(RSP) Transition Dipole Moment, <1| coordinate |2>  |  Roots  |              Dipole Moment
+==============================================================================================================
+(RSP) Transition Dipole Moment, <1|x|2>             |    0    |     (2.210376709405008e-05,-2.988722000519485e-06)
+(RSP) Transition Dipole Moment, <1|x|2>             |    1    |     (0.09917981588945751,-0.5340958609581291)
+(RSP) Transition Dipole Moment, <1|x|2>             |    2    |     (-3.955251795145106e-06,-1.788059234788848e-05)
+(RSP) Transition Dipole Moment, <1|x|2>             |    3    |     (-0.04389799235680904,-0.09921951970397154)
+(RSP) Transition Dipole Moment, <1|x|2>             |    4    |     (-5.153725288968644e-06,-8.617079229190976e-06)
+(RSP) Transition Dipole Moment, <1|x|2>             |    5    |     (-1.259743891654047e-05,-2.746766666072612e-06)
+
+(RSP) Transition Dipole Moment, <1|y|2>             |    0    |     (-1.967755884354874e-08,2.155765021936204e-07)
+(RSP) Transition Dipole Moment, <1|y|2>             |    1    |     (-1.564589889447283e-08,6.562943021376849e-08)
+(RSP) Transition Dipole Moment, <1|y|2>             |    2    |     (-2.523092041220228e-08,-1.947517099173536e-08)
+(RSP) Transition Dipole Moment, <1|y|2>             |    3    |     (-1.608461689163507e-08,1.332278985460285e-08)
+(RSP) Transition Dipole Moment, <1|y|2>             |    4    |     (5.896048352021859e-07,-2.741652419433293e-07)
+(RSP) Transition Dipole Moment, <1|y|2>             |    5    |     (-1.52038333665999e-08,-2.526295334496853e-07)
+
+(RSP) Transition Dipole Moment, <1|z|2>             |    0    |     (1.642882647457994e-07,1.607687670330346e-07)
+(RSP) Transition Dipole Moment, <1|z|2>             |    1    |     (-1.117665670371102e-07,2.207397280528838e-09)
+(RSP) Transition Dipole Moment, <1|z|2>             |    2    |     (1.215486724821296e-07,6.841264250874554e-08)
+(RSP) Transition Dipole Moment, <1|z|2>             |    3    |     (-1.376635609834458e-08,9.322536553334973e-09)
+(RSP) Transition Dipole Moment, <1|z|2>             |    4    |     (-4.036608041378716e-07,3.706381984103232e-07)
+(RSP) Transition Dipole Moment, <1|z|2>             |    5    |     (8.402350952226427e-08,1.239761776307898e-07)
+
+
+==============================================================================================================
+(RSP) Transition Moment, <1| pi_coordinate |2>      |  Roots  |              Dipole Moment
+==============================================================================================================
+(RSP) Transition Moment, <1|pi_x|2>                 |    0    |     (0.0001887571765914007,0.0004687450193711393)
+(RSP) Transition Moment, <1|pi_x|2>                 |    1    |     (-0.2190402596799971,-0.04453326075544167)
+(RSP) Transition Moment, <1|pi_x|2>                 |    2    |     (-0.0001446991363569938,5.288051291374818e-06)
+(RSP) Transition Moment, <1|pi_x|2>                 |    3    |     (-0.04315570834277749,0.01733064834085131)
+(RSP) Transition Moment, <1|pi_x|2>                 |    4    |     (-0.0005170431158264284,0.0002758657973139389)
+(RSP) Transition Moment, <1|pi_x|2>                 |    5    |     (0.0001606717920965926,-0.000110568294922038)
+
+(RSP) Transition Moment, <1|pi_y|2>                 |    0    |     (-1.100703151615336e-06,1.151339595923139e-06)
+(RSP) Transition Moment, <1|pi_y|2>                 |    1    |     (-1.192981208752715e-06,8.690928197927187e-07)
+(RSP) Transition Moment, <1|pi_y|2>                 |    2    |     (-5.968988990892615e-07,6.204489676411034e-07)
+(RSP) Transition Moment, <1|pi_y|2>                 |    3    |     (3.412994663790063e-07,8.913598384588979e-07)
+(RSP) Transition Moment, <1|pi_y|2>                 |    4    |     (-6.018529156542286e-06,-1.106909496730749e-05)
+(RSP) Transition Moment, <1|pi_y|2>                 |    5    |     (2.471269042882282e-06,1.302762987715989e-06)
+
+(RSP) Transition Moment, <1|pi_z|2>                 |    0    |     (2.79146314701508e-06,-4.348348312091137e-07)
+(RSP) Transition Moment, <1|pi_z|2>                 |    1    |     (5.099121488794683e-07,8.183916594275496e-08)
+(RSP) Transition Moment, <1|pi_z|2>                 |    2    |     (-1.980933693027854e-07,1.135121329936026e-06)
+(RSP) Transition Moment, <1|pi_z|2>                 |    3    |     (-9.624114626031547e-08,5.705377202701465e-07)
+(RSP) Transition Moment, <1|pi_z|2>                 |    4    |     (-6.270719483048957e-06,1.687448524461563e-06)
+(RSP) Transition Moment, <1|pi_z|2>                 |    5    |     (1.588845965320192e-06,-2.27591440520324e-06)
+
+
+==============================================================================================================
+(RSP) Electric Dipole Oscillator Strength
+(length gauge):            	1.291729466011172e-10	0.07960005023146256	1.010402561790097e-10	0.003578044084372432	3.185505431910801e-11	5.585460135754265e-11	
+(magnetic-velocity gauge): 	4.372095023372281e-07	0.08231983846385349	3.093247437056438e-08	0.003162386667466325	4.868186157077708e-07	5.036708124614732e-08	
+(mixed gauge):             	(-7.283245248629876e-09,-1.847969782912771e-09)	(0.08093686445393845,-0.001373771744685532)	(1.738731732852662e-09,-3.18549723332474e-10)	(0.003361779548457425,-0.0001166069003061713)	(3.922447654690146e-09,-1.934557554680182e-10)	(-1.222947708856069e-09,1.147242085103043e-09)	
+

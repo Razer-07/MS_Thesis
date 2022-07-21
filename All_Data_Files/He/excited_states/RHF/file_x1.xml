@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<task type="london">
+<stage type="early-analysis">
+</stage>
+<stage type="scf">
+<quantity label="electronic-energy" unit="Hartree">
+-2.8557096088245397e+00</quantity>
+<quantity label="kinetic-energy" unit="Hartree">
+2.8418852441393962e+00</quantity>
+<quantity label="scalar-potential-energy" unit="Hartree">
+-6.7194507646119677e+00</quantity>
+<quantity label="spin-zeeman-energy" unit="Hartree">
+0.0000000000000000e+00</quantity>
+<quantity label="coulomb-self-repulsion-energy" unit="Hartree">
+2.0437118232960643e+00</quantity>
+<quantity label="homo-lumo-gap" unit="Hartree">
+1.0895896178567117e+00</quantity>
+<properties>
+<quantity label="spin projection on field" unit="dimensionless">
+0.0000000000000000e+00</quantity>
+<quantity label="spin projection squared" unit="dimensionless">
+0.0000000000000000e+00</quantity>
+<quantity label="total spin" unit="dimensionless">
+0.0000000000000000e+00</quantity>
+<quantity label="active-denst-fermi-amaldi-repulsion" unit="Hartree">
+0.0000000000000000e+00</quantity>
+<quantity label="kinetic-energy" unit="Hartree">
+2.8418852441393452e+00</quantity>
+<quantity label="scalar-potential-energy" unit="Hartree">
+-6.7194507646119037e+00</quantity>
+<property type="angular momentum" unit="au">
+<matrix type="complex" rows="3" columns="1" packing="column">
+7.9717122008560581e-03
+-1.5326735992935931e-20
+-2.1820171438761818e-34
+</matrix>
+</property>
+<property type="coordinate derivative contribution to angular momentum" unit="au">
+<matrix type="complex" rows="3" columns="1" packing="column">
+-1.3759290000000469e-04
+-1.5326735992935928e-20
+6.2741280637116558e-20
+</matrix>
+</property>
+<property type="electronic dipole moment" unit="au">
+<matrix type="complex" rows="3" columns="1" packing="column">
+-1.0697575556200394e-16
+1.9447779015183922e-18
+-4.6081167095752144e-15
+</matrix>
+</property>
+<property type="nuclear dipole moment" unit="au">
+<matrix type="complex" rows="3" columns="1" packing="column">
+0.0000000000000000e+00
+0.0000000000000000e+00
+0.0000000000000000e+00
+</matrix>
+</property>
+</properties>
+</stage>
+</task>

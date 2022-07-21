@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<task type="london">
+<stage type="early-analysis">
+</stage>
+<stage type="scf">
+<quantity label="electronic-energy" unit="Hartree">
+-9.1966441947132836e+01</quantity>
+<quantity label="kinetic-energy" unit="Hartree">
+8.0371076030283078e+01</quantity>
+<quantity label="scalar-potential-energy" unit="Hartree">
+-2.1524605957896432e+02</quantity>
+<quantity label="spin-zeeman-energy" unit="Hartree">
+-2.6645352591003756e-17</quantity>
+<quantity label="coulomb-self-repulsion-energy" unit="Hartree">
+5.2606471609418122e+01</quantity>
+<quantity label="homo-lumo-gap-down" unit="Hartree">
+6.1044386252171112e-01</quantity>
+<quantity label="homo-lumo-gap-up" unit="Hartree">
+6.1044386252303529e-01</quantity>
+<properties>
+<quantity label="spin projection on field" unit="dimensionless">
+-1.0658141036401503e-14</quantity>
+<quantity label="spin projection squared" unit="dimensionless">
+2.6645352591003757e-15</quantity>
+<quantity label="total spin" unit="dimensionless">
+3.8191672047105385e-14</quantity>
+<property type="angular momentum" unit="au">
+<matrix type="complex" rows="3" columns="1" packing="column">
+-1.9666526404990575e-15
+9.0438270991914135e-02
+2.4273649300308081e-14
+</matrix>
+</property>
+<property type="coordinate derivative contribution to angular momentum" unit="au">
+<matrix type="complex" rows="3" columns="1" packing="column">
+-1.9726483947241445e-15
+-3.2524183283676473e-03
+3.3052076603076747e-14
+</matrix>
+</property>
+<property type="electronic dipole moment" unit="au">
+<matrix type="complex" rows="3" columns="1" packing="column">
+2.1630569521999791e-15
+1.3902384554633404e-13
+6.4053805711306278e-01
+</matrix>
+</property>
+<property type="nuclear dipole moment" unit="au">
+<matrix type="complex" rows="3" columns="1" packing="column">
+0.0000000000000000e+00
+0.0000000000000000e+00
+0.0000000000000000e+00
+</matrix>
+</property>
+</properties>
+</stage>
+</task>

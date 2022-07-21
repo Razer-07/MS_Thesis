@@ -1,0 +1,713 @@
+
+Running the London Hartree-Fock program at /home/rahul/Documents/london-master/./london.x.
+Founded by Erik Tellgren, Alessandro Soncini and Trygve Helgaker.
+Programming by:
+  Erik Tellgren (main programmer)
+  Kai Kaarvann Lange
+  Andrew M. Teale
+  Ulf Ekstrom
+  Stella Stopkowicz
+  Jon H. Austad
+
+
+Basis file /home/rahul/Documents/london-master/./baslib/aug-cc-pVDZ opened for reading.
+Basis file /home/rahul/Documents/london-master/./baslib/aug-cc-pVDZ opened for reading.
+User input successfully read from file_x4.inp.
+
+london-input{
+  analysis{
+    analysis-only = no
+    xml-print-potential-basis-overlap = no
+    xml-print-potential-basis-kinetic = no
+    export-operators = no
+    # decypher-density-matrix-file = binary-file, plain-text-file
+    # density-matrix-binary-to-text = binary-input-file, text-output-file
+    # density-matrix-text-to-binary = text-input-file, binary-output-file
+    # density-matrix-for-plotting = filename
+    # density-plot-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # streamline-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # vortexline-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # current-through-plane = {density_matrix_file,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # linearly-combine-density-matrices = file : 0.6 * infile1, 0.4 * infile2, ...
+    # spin-rotate-2c-density-matrix = file : infile, angle_degrees, (ux, uy, uz)
+    linear-dependence-tol = 1e-06
+    # overlap-for-ci-state-files = file1, file2
+  }
+
+  scf{
+    spin-symmetry-constraint = Restricted Hartree-Fock
+    linear-dependence-tol = 1e-10
+    uhf-spin-projection = 0
+    disable-spin-zeeman-in-fock-matrix = no
+    noisy-init-guess = no
+    # density-matrix-input-file = 
+    # density-matrix-output-file = 
+    # density-plot-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # molecular-orbitals-to-plot = (1,2,3,...)
+    min-scf-iterations = 0
+    max-scf-iterations = 160
+    use-density-fitting = no
+    use-admm = no
+    analyze-using-dft-grid = no
+
+    diis{
+      convergence-tolerance = 1e-10
+      subspace-dimension = 7
+      diagonalization-temperature = 0
+    }
+  }
+
+  casscf{
+    max-active-orbitals = 2000
+    number-of-frozen-orbitals = 0
+    number-of-states-in-casscf-optimization = 1
+    number-of-ci-states = 1
+    spin-projection = default
+    num-1exc-init-vec = 0
+    num-2exc-init-vec = 0
+    use-noisy-init-vec = no
+    ci-max-subspace-dim = default
+    ci-convergence-tol = 1e-06
+    # density-matrix-input-file = 
+    # density-matrix-output-file = 
+    # ci-states-output-file = 
+    # density-plot-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+    # analysis-weights = (w0, w1, ...)
+  }
+
+  mp2{
+    spin-projection = default
+    number-of-weights = 8
+    basis-functions-per-block = 20
+    cs-tolerance = 0
+    print-mp2-components = 0
+    # density-matrix-input-file = 
+    # density-matrix-output-file = 
+    #property-request = relaxed-density-matrix
+  }
+
+  rsp{
+    number-of-roots-requested = 5
+    root-selection-method = energy
+    excitation-basis = MObasis
+    starting-guess = UnitGuess
+    solver_choice = GenEig
+    method_choice = RPA
+    precondition = false
+    initial-subspace-dimension = 100
+    maximum-subspace-dimension = 800
+    convergence-tolerance = 1e-10
+    max-rsp-iterations = 200
+    # density-matrix-input-file = 
+    # density-matrix-output-file = 
+  }
+
+  coupled-cluster{
+    truncation-level = CCSD
+    property-request = off
+    spin-projection = default
+    max-it = 150
+    write-t-amplitudes = yes
+    read-t-amplitudes = no
+    # density-matrix-output-file = 
+    # memory-in-gb = 
+    # interface = 
+    # molecular-orbitals-to-freeze = (1,3,5,...)
+    diis{
+      convergence-tolerance = 1e-06
+      subspace-dimension = 7
+      diagonalization-temperature = 0
+    }
+  }
+
+  finite-difference{
+    run-finite-difference = false
+    run-type = gradient
+    use-ref-density = false
+    step-size = 0.0005
+  }
+
+  system{
+    molecular-charge = 0
+    correlation-model = RSP
+
+    hamiltonian{
+      electron-mass = 1
+      speed-of-light = 137.036
+      adiabatic-connection-lambda = 1
+      nuclear-charge-distribution = point charge
+
+      magnetic-field = (0.4, 0, 0)
+      gauge-origin = (0, 0, 0.1173)
+
+      linear-magnetic-field = {(0, 0, 0), (0, 0, 0), (0, 0, 0)}
+      linear-magnetic-origin = (0, 0, 0)
+
+      electric-field = (0, 0, 0)
+      electric-origin = (0, 0, 0)
+      linear-electric-field = {(0, 0, 0), (0, 0, 0), (0, 0, 0)}
+
+      include-basis-expanded-scalar-potential = no
+      scalar-potential-coefficients = (empty)
+      include-basis-expanded-vector-potential = no
+      vector-potential-coefficients-x = (empty)
+      vector-potential-coefficients-y = (empty)
+      vector-potential-coefficients-z = (empty)
+      include-repulsion-from-external-density = no
+      external-charge-density-scale-factor = 1
+      include-coulomb-distance-to-external-density = no
+      external-charge-density-distance-factor = 1
+      # external-charge-density-file = filename
+      # lieb-ref-density-file = filename
+      # potential-plot-data = {filename,(x0,y0,z0),(x1,y1,z1),(x2,y2,z2),(x3,y3,z3),(N1xN2xN3),precision=N,scolon={y/n},fields{rho,grad(rho),jp,j,A,B,rho2nu,rho2omega,tau_p,tau_pi,laplacian(rho),grad(rho)^2,jp^2,tau_tensor}}
+
+      integral{
+        use-coulomb-integral-permutation-symmetry = yes
+        use-cauchy-schwarz-screening = yes
+        cauchy-schwarz-tol = 1e-15
+        boys-function-tol = 1e-17
+      }
+
+      dft{
+        # xc-functional = 0.7 * lda + 0.54 * lyp
+        # xc-fun-parameter = {param1 = 0.1, param2 = 0.2, param3 = 0.3}
+        jp-functional = none
+        vrg-functional = none
+        tau-correction = none
+        vrg-hard-rs-cutoff = 62035.049
+        vrg-soft-density-cutoff = 1e-14
+        exact-exchange-fraction = default
+        # gridfile = 
+        radial-grid-type = LMG
+        allow-grid-pruning = yes
+        gc2-radial-grid-threshold = 1e-13
+        lebedev-angular-target-degree = 35
+        lebedev-angular-minimal-degree = 15
+        weight-screen-threshold = 1e-20
+        becke-hardness = 3
+        allow-becke-atom-size-correction = yes
+      }
+    }
+
+    # data on state flags lost, output incomplete here
+    use-london-orbitals = yes
+    gto-contraction-type = all, normalizedprimitive
+    basis = aug-cc-pVDZ
+    # density-fitting-basis = 
+    # admm-basis = 
+    # scalar-potential-basis = 
+    # vector-potential-basis = 
+    # if you really want to: # orbital-wave-vector-offset = (0, 0, 0)
+    charge = 1
+    H       0.1643            0            0
+    H      -0.1643            0            0
+  }
+}
+
+Basis set information:
+The orbital basis consists of 22 basis functions formed from linear combinations of 22 primitive basis functions.
+The density-fitting basis consists of 0 basis functions formed from linear combinations of 0 primitive basis functions.
+The scalar potential basis consists of 0 basis functions formed from linear combinations of 0 primitive basis functions.
+The vector potential basis consists of 0 basis functions formed from linear combinations of 0 primitive basis functions.
+RHF Spin type 3
+
+RSP: Running Hartree-Fock to determine orbital space.
+RSP: run scf2
+
+
+SCF: Running SCF optimization.
+
+SCF: The SCF basis contains 22 basis functions.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+SCF-SD: Initial density by diagonalizing the one-electron part of the Fock matrix.
+Initial trace: Tr(D) = (2,-6.39469e-36)
+
+SCF iteration 1:       [wall time: Tue May 17 11:18:47 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.5323570574 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            3.286896771
+  Nuclear attraction: -6.947051541
+  Spin Zeeman effect: 0
+  Coulomb:            2.298596387
+  Exchange:           -1.149298194
+  Total:              0.5323570574
+
+ Ehomo = -0.722180045, Elumo = 0.272855174
+ DIIS error norm: 0.9393692981
+
+SCF iteration 2:       [wall time: Tue May 17 11:18:47 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.4398219402 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.496361548
+  Nuclear attraction: -6.082984952
+  Spin Zeeman effect: 0
+  Coulomb:            1.966463421
+  Exchange:           -0.9832317104
+  Total:              0.4398219402
+
+ Ehomo = -0.8174385915, Elumo = 0.2584443888
+ DIIS error norm: 0.0891330648
+
+SCF iteration 3:       [wall time: Tue May 17 11:18:47 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.4385462183 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.417836406
+  Nuclear attraction: -5.985797875
+  Spin Zeeman effect: 0
+  Coulomb:            1.926588107
+  Exchange:           -0.9632940535
+  Total:              0.4385462183
+
+ Ehomo = -0.8210783618, Elumo = 0.2568556116
+ DIIS error norm: 0.009173790102
+
+SCF iteration 4:       [wall time: Tue May 17 11:18:47 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 1 seconds (with 1 seconds used for Coulomb and exchange).
+ Total energy: 0.4385316626 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.414186862
+  Nuclear attraction: -5.980742119
+  Spin Zeeman effect: 0
+  Coulomb:            1.923746572
+  Exchange:           -0.9618732862
+  Total:              0.4385316626
+
+ Ehomo = -0.8214772538, Elumo = 0.2567600346
+ DIIS error norm: 0.000746598345
+
+SCF iteration 5:       [wall time: Tue May 17 11:18:48 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.4385315441 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.413866445
+  Nuclear attraction: -5.980298514
+  Spin Zeeman effect: 0
+  Coulomb:            1.92349996
+  Exchange:           -0.9617499799
+  Total:              0.4385315441
+
+ Ehomo = -0.8214642621, Elumo = 0.2567574295
+ DIIS error norm: 2.662716969e-05
+
+SCF iteration 6:       [wall time: Tue May 17 11:18:48 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.438531544 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.413872196
+  Nuclear attraction: -5.980305176
+  Spin Zeeman effect: 0
+  Coulomb:            1.923501782
+  Exchange:           -0.961750891
+  Total:              0.438531544
+
+ Ehomo = -0.8214657648, Elumo = 0.2567575024
+ DIIS error norm: 2.526631334e-06
+
+SCF iteration 7:       [wall time: Tue May 17 11:18:48 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.438531544 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.41387129
+  Nuclear attraction: -5.980304014
+  Spin Zeeman effect: 0
+  Coulomb:            1.92350127
+  Exchange:           -0.9617506349
+  Total:              0.438531544
+
+ Ehomo = -0.8214657226, Elumo = 0.2567575023
+ DIIS error norm: 2.327059958e-07
+
+SCF iteration 8:       [wall time: Tue May 17 11:18:48 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.438531544 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.413871325
+  Nuclear attraction: -5.980304059
+  Spin Zeeman effect: 0
+  Coulomb:            1.923501288
+  Exchange:           -0.9617506442
+  Total:              0.438531544
+
+ Ehomo = -0.8214657229, Elumo = 0.2567575025
+ DIIS error norm: 2.724552562e-09
+
+SCF iteration 9:       [wall time: Tue May 17 11:18:48 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.438531544 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.413871324
+  Nuclear attraction: -5.980304057
+  Spin Zeeman effect: 0
+  Coulomb:            1.923501288
+  Exchange:           -0.9617506438
+  Total:              0.438531544
+
+ Ehomo = -0.8214657229, Elumo = 0.2567575025
+ DIIS error norm: 1.91111892e-10
+
+SCF iteration 10:       [wall time: Tue May 17 11:18:48 2022]
+SCF: using a fraction 1 of Hartree-Fock exchange.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+ Fock build F = F(D) performed in 0 seconds (with 0 seconds used for Coulomb and exchange).
+ Total energy: 0.438531544 Hartree
+ Fock matrix inversion D = D(Fmix) performed in 0 seconds.
+  Nuclear repulsion:  3.043213634
+  Kinetic:            2.413871324
+  Nuclear attraction: -5.980304057
+  Spin Zeeman effect: 0
+  Coulomb:            1.923501288
+  Exchange:           -0.9617506439
+  Total:              0.438531544
+
+ Ehomo = -0.8214657229, Elumo = 0.2567575025
+ DIIS error norm: 3.824483027e-14
+
+Converged SCF results:
+-----------------------
+(pre-RSP) Nuclear repulsion:  3.043213633597079
+(pre-RSP) Kinetic:            2.413871324047315
+(pre-RSP) Nuclear attraction: -5.980304057490733
+(pre-RSP) Spin Zeeman effect: 0
+(pre-RSP) Coulomb:            1.923501287722177
+(pre-RSP) Exchange:           -0.961750643861089
+(pre-RSP) Total electronic:   -2.604682089582331
+(pre-RSP) Total:              0.4385315440147477
+
+(pre-RSP) E(LUMO): 0.2567575025132882
+(pre-RSP) E(HOMO): -0.8214657228606148
+(pre-RSP) E(GAP):  1.078223225373903
+
+Orbital energies (Eorb), orbital contributions to the total energy (Econtrib), and reflection symmetry properties for the molecular orbitals:
+
+Orbital analysis (pre-RSP)
+    Eorb      Econtrib  Occ  Reflection(xy)  Reflection(xz)  Reflection(yz)
+---------------------------------------------------------------------------
+ -0.821466    -1.30234   2  (1.0000,0.0000)  (0.9995,0.0000)  (1.0000,0.0000)
+  0.256758   -0.126542   0  (0.0000,-0.0000)  (0.0019,0.0000)  (1.0000,0.0000)
+  0.309845   0.0236736   0  (1.0000,-0.0000)  (0.9961,-0.0000)  (-1.0000,-0.0000)
+  0.355841   0.0454221   0  (1.0000,0.0000)  (0.9960,0.0000)  (1.0000,-0.0000)
+  0.426065    0.114503   0  (-0.0000,-0.0000)  (0.0020,-0.0000)  (-1.0000,-0.0000)
+  0.567574    0.326465   0  (1.0000,-0.0000)  (0.9913,0.0000)  (-1.0000,-0.0000)
+  0.656758    0.273458   0  (-0.0000,-0.0000)  (0.0019,-0.0000)  (1.0000,0.0000)
+  0.681983    0.345765   0  (1.0000,-0.0000)  (0.9951,0.0000)  (1.0000,-0.0000)
+  0.766435    0.502378   0  (1.0000,-0.0000)  (0.9878,-0.0000)  (1.0000,0.0000)
+  0.826065    0.514503   0  (0.0000,-0.0000)  (0.0020,-0.0000)  (-1.0000,-0.0000)
+  0.838639     0.54423   0  (1.0000,0.0000)  (0.9925,-0.0000)  (-1.0000,-0.0000)
+    1.5654    0.881335   0  (-0.0000,0.0000)  (0.0007,-0.0000)  (1.0000,-0.0000)
+    1.5688     1.09935   0  (1.0000,0.0000)  (0.9973,0.0000)  (-1.0000,-0.0000)
+    1.9654     1.28134   0  (0.0000,0.0000)  (0.0007,0.0000)  (1.0000,-0.0000)
+   2.28992     1.62867   0  (1.0000,0.0000)  (0.9988,-0.0000)  (1.0000,0.0000)
+   2.40499     1.76152   0  (-0.0000,-0.0000)  (0.0005,0.0000)  (-1.0000,0.0000)
+
+
+Properties:
+-----------
+Spin-projection on field: <sigma_B> = <2 S_B> = 0
+Spin-projection squared: <sigma_B> = <4 S_B^2> = 0
+Total spin: <sigma^2> = <4 S^2> = 0 = 4 * 0 * (0 + 1)
+Total spin quantum number: s = 0
+
+
+SimpleEnergies (SCF)
+
+(SCF) Traces of the SCF 1-electron density matrix with simple operators
+(SCF)     <pi^2/2m> = 2.413871324047338
+(SCF)     <nucl.attr.> = -5.980304057490764
+(SCF)     <hom.el.field> = 0
+(SCF)     <lin.el.field> = 0
+(SCF)     <bas.exp.scal.pot.> = 0
+(SCF)     <ext.charge repulsion> = 0
+(SCF)     <ext.charge repulsion> * fac = 0
+
+SimpleProp (SCF)
+
+(SCF) Traces of the SCF 1-electron density matrix with simple operators
+(SCF) Mechanical/kinetic momentum:
+(SCF)     <PIx> = 1.169602293452682e-18
+(SCF)     <PIy> = -8.253401989248595e-18
+(SCF)     <PIz> = 4.607031813180435e-18
+(SCF)     B x pi = (0, -1.842812725272174e-18, -3.301360795699438e-18)
+(SCF) Angular momentum w.r.t. gauge origin (0, 0, 0.1173):
+(SCF)     <Lx> = 0.3382121447525208
+(SCF)     <Ly> = -3.510744380719522e-16
+(SCF)     <Lz> = 3.220715175528094e-16
+(SCF) Coordinate derivative contribution to angular momentum w.r.t. C = (0, 0, 0.1173):
+(SCF)     <Lcoord_x> = -0.005503716000000012
+(SCF)     <Lcoord_y> = 1.238628136399937e-17
+(SCF)     <Lcoord_z> = 6.246020953053211e-17
+(SCF) Dipole moment:
+(SCF)     <x> = -3.02026199189287e-15
+(SCF)     <y> = -2.579768847901904e-16
+(SCF)     <z> = -3.739395762628051e-17
+(SCF) Nuclear dipole moment:
+(SCF)     <X> = 0
+(SCF)     <Y> = 0
+(SCF)     <Z> = 0
+(SCF) Total dipole moment: (3.02026199189287e-15, 2.579768847901904e-16, 3.739395762628051e-17)
+(SCF) Coordinate derivative contribution to angular momentum w.r.t. center of charge (-1.510130995946433e-15, -1.289884423950951e-16, -1.869697881314023e-17):
+(SCF)     <Lambda_x> = -1.403379635333715e-30
+(SCF)     <Lambda_y> = 1.252347571302127e-17
+(SCF)     <Lambda_z> = -8.829471442178827e-18
+(SCF) Electronic quadrupole moments w.r.t. center of electronic charge at (-1.510130995946433e-15, -1.289884423950951e-16, -1.869697881314023e-17):
+(SCF)         x         y          z
+(SCF) x: 0.89482834743226  1.817303597179759e-15  -1.666664933472653e-15
+(SCF) y: 1.817303597179759e-15  0.8455303618813026  -7.380926517818764e-30
+(SCF) z: -1.666664933472653e-15  -7.380926517818764e-30  0.8455303618813026
+(SCF) Magnetic quadrupole moments w.r.t. C = (0, 0, 0):
+(SCF)         x         y          z
+(SCF) Jx: 2.349717642680105e-14  7.266145264179182e-17  1.392794813510855e-17
+(SCF) Jy: -1.022948861958255e-17  -1.174858821340052e-14  -1.930814738222826e-19
+(SCF) Jz: -4.579869351797528e-18  1.930814738224033e-19  -1.174858821340052e-14
+(SCF) Anapole moment w.r.t. C = (0, 0, 0):
+(SCF)     a_x = 3.861629476446859e-19
+(SCF)     a_y = 1.850781748690608e-17
+(SCF)     a_z = -8.289094126137437e-17
+(SCF) Hellmann-Feynman forces:
+(SCF) H-F force on H at pos = (0.1643, 0, 0):   F = (0.9131584332306008, 1.024973005705453e-16, 1.210756759516234e-17)
+(SCF) H-F force on H at pos = (-0.1643, 0, 0):   F = (-0.9131584332305803, 3.598649379611548e-17, -9.267496234214843e-18)
+(SCF) Total H-F force on center of mass:   Ftot = (2.042810365310288e-14, 1.384837943666608e-16, 2.840071360947494e-18)
+(SCF) Scaling pressure w.r.t. center of charge:   0.3000638611595721
+(SCF) Total H-F torque w.r.t. center of charge: (-2.222892188097191e-33, -3.511922987166293e-18, 1.092772555303639e-17)
+(SCF) Nuclear shielding integrals:
+(SCF) H at C = (0.1643, 0, 0):
+(SCF)    <Lx/|r - C|^3> = 0.3839880743024394
+(SCF)    <Ly/|r - C|^3> = -3.989519407993438e-18
+(SCF)    <Lz/|r - C|^3> = 2.533232165155974e-17
+(SCF) H at C = (-0.1643, 0, 0):
+(SCF)    <Lx/|r - C|^3> = 0.3839880743024403
+(SCF)    <Ly/|r - C|^3> = -2.108394682284322e-17
+(SCF)    <Lz/|r - C|^3> = 1.706079629898707e-17
+ 
+
+Mulliken (SCF)
+
+(SCF) Mulliken decomposition of traces of SCF 1-electron density matrix with simple operators
+
+(SCF) Mulliken populations:
+(SCF) Nucleus #1 (H):  0.5204015098572767   [narrow def.],   0.9999999999584808   [wide def.]
+(SCF) Nucleus #2 (H):  0.5204015099403164   [narrow def.],   1.000000000041521   [wide def.]
+
+(SCF) Total mechanical momentum: <pi> = (1.169602293452681e-18, -8.253401989248287e-18, 4.607031813179868e-18)
+
+(SCF) Mulliken momenta:
+(SCF) Nucleus #1 (H):  (3.448595905864356e-19, 4.430548349440008e-16, 5.077444384159685e-16)   [narrow def.],   (1.009987200716517e-18, 4.40617988122347e-16, 5.08999471999659e-16)   [wide def.]
+(SCF) Nucleus #2 (H):  (-5.055125173939171e-19, -4.46434543289942e-16, -5.056474737701685e-16)   [narrow def.],   (1.596150927361645e-19, -4.488713901115955e-16, -5.043924401864786e-16)   [wide def.]
+
+(SCF) Mulliken bond momenta:
+(SCF) Nucleus #1 (H):  Nuc. #2  (6.651276101300816e-19, -2.436846821653747e-18, 1.255033583690503e-18) 
+(SCF) Nucleus #2 (H):  Nuc. #1  (6.651276101300815e-19, -2.436846821653462e-18, 1.255033583689923e-18) 
+ 
+
+Orbital symmetry properties for SCF:
+                          Inversion           Rot180X           Rot180Y           Rot180Z            ReflXY            ReflXZ            ReflYZ
+  can.orb. 0   (0.9995,-0.0000)   (0.9995,-0.0000)   (1.0000,0.0000)   (0.9995,0.0000)   (1.0000,-0.0000)   (0.9995,-0.0000)   (1.0000,0.0000) 
+  can.orb. 1   (-0.9961,0.0000)   (-0.9961,-0.0000)   (0.0000,-0.0000)   (0.0019,-0.0000)   (0.0000,0.0000)   (0.0019,-0.0000)   (1.0000,0.0000) 
+  can.orb. 2   (-0.9961,-0.0000)   (0.9961,0.0000)   (-1.0000,-0.0000)   (-0.9961,-0.0000)   (1.0000,0.0000)   (0.9961,0.0000)   (-1.0000,-0.0000) 
+  can.orb. 3   (0.9960,-0.0000)   (0.9960,-0.0000)   (1.0000,0.0000)   (0.9960,-0.0000)   (1.0000,0.0000)   (0.9960,-0.0000)   (1.0000,0.0000) 
+  can.orb. 4   (0.9960,-0.0000)   (-0.9960,0.0000)   (0.0000,0.0000)   (-0.0020,-0.0000)   (-0.0000,-0.0000)   (0.0020,0.0000)   (-1.0000,0.0000) 
+  can.orb. 5   (-0.9913,-0.0000)   (0.9913,0.0000)   (-1.0000,-0.0000)   (-0.9913,-0.0000)   (1.0000,0.0000)   (0.9913,0.0000)   (-1.0000,-0.0000) 
+  can.orb. 6   (-0.9961,-0.0000)   (-0.9961,0.0000)   (-0.0000,0.0000)   (0.0019,-0.0000)   (-0.0000,0.0000)   (0.0019,-0.0000)   (1.0000,-0.0000) 
+  can.orb. 7   (0.9951,0.0000)   (0.9951,0.0000)   (1.0000,0.0000)   (0.9951,0.0000)   (1.0000,0.0000)   (0.9951,0.0000)   (1.0000,0.0000) 
+  can.orb. 8   (0.9878,0.0000)   (0.9878,0.0000)   (1.0000,-0.0000)   (0.9878,0.0000)   (1.0000,-0.0000)   (0.9878,0.0000)   (1.0000,-0.0000) 
+  can.orb. 9   (0.9960,0.0000)   (-0.9960,-0.0000)   (-0.0000,-0.0000)   (-0.0020,-0.0000)   (0.0000,0.0000)   (0.0020,0.0000)   (-1.0000,0.0000) 
+  can.orb. 10   (-0.9925,-0.0000)   (0.9925,0.0000)   (-1.0000,0.0000)   (-0.9925,-0.0000)   (1.0000,-0.0000)   (0.9925,0.0000)   (-1.0000,0.0000) 
+  can.orb. 11   (-0.9986,-0.0000)   (-0.9986,-0.0000)   (-0.0000,0.0000)   (0.0007,0.0000)   (-0.0000,0.0000)   (0.0007,-0.0000)   (1.0000,-0.0000) 
+  can.orb. 12   (-0.9973,0.0000)   (0.9973,-0.0000)   (-1.0000,0.0000)   (-0.9973,0.0000)   (1.0000,-0.0000)   (0.9973,-0.0000)   (-1.0000,0.0000) 
+  can.orb. 13   (-0.9986,-0.0000)   (-0.9986,-0.0000)   (0.0000,-0.0000)   (0.0007,-0.0000)   (0.0000,-0.0000)   (0.0007,-0.0000)   (1.0000,0.0000) 
+  can.orb. 14   (0.9988,0.0000)   (0.9988,0.0000)   (1.0000,-0.0000)   (0.9988,0.0000)   (1.0000,-0.0000)   (0.9988,0.0000)   (1.0000,-0.0000) 
+  can.orb. 15   (0.9990,-0.0000)   (-0.9990,0.0000)   (0.0000,-0.0000)   (-0.0005,0.0000)   (-0.0000,0.0000)   (0.0005,-0.0000)   (-1.0000,0.0000) 
+  can.orb. 16   (0.9990,-0.0000)   (-0.9990,0.0000)   (-0.0000,-0.0000)   (-0.0005,-0.0000)   (0.0000,0.0000)   (0.0005,0.0000)   (-1.0000,0.0000) 
+  can.orb. 17   (0.9990,-0.0000)   (0.9990,0.0000)   (1.0000,-0.0000)   (0.9990,-0.0000)   (1.0000,0.0000)   (0.9990,0.0000)   (1.0000,-0.0000) 
+  can.orb. 18   (-0.9987,-0.0000)   (0.9987,0.0000)   (-1.0000,-0.0000)   (-0.9987,-0.0000)   (1.0000,0.0000)   (0.9987,0.0000)   (-1.0000,-0.0000) 
+  can.orb. 19   (-0.9995,-0.0000)   (0.9995,0.0000)   (-1.0000,-0.0000)   (-0.9995,-0.0000)   (1.0000,0.0000)   (0.9995,0.0000)   (-1.0000,-0.0000) 
+
+
+
+Orbital properties for SCF:
+                           Lcoord_x          Lcoord_y          Lcoord_z               x^2               y^2               z^2
+  can.orb. 0   (-0.0028,0.0000)   (0.0000,0.0000)   (0.0000,0.0000)   (0.4474,0.0000)   (0.4228,-0.0000)   (0.4228,0.0000) 
+  can.orb. 1   (-1.0028,-0.0000)   (0.0000,0.0000)   (0.0000,-0.0000)   (1.7689,0.0000)   (3.5104,0.0000)   (3.5104,0.0000) 
+  can.orb. 2   (-0.0028,0.0000)   (-0.0000,0.0000)   (-0.0000,-0.0000)   (10.5067,0.0000)   (3.5348,0.0000)   (3.5348,0.0000) 
+  can.orb. 3   (-0.0028,0.0000)   (-0.0000,0.0000)   (0.0000,-0.0000)   (8.1794,0.0000)   (3.6703,-0.0000)   (3.6703,0.0000) 
+  can.orb. 4   (-1.0028,0.0000)   (0.0000,0.0000)   (-0.0000,-0.0000)   (5.4147,-0.0000)   (3.6009,-0.0000)   (3.6009,-0.0000) 
+  can.orb. 5   (-0.0028,-0.0000)   (0.0000,-0.0000)   (0.0000,-0.0000)   (23.6887,0.0000)   (7.8977,0.0000)   (7.8977,-0.0000) 
+  can.orb. 6   (0.9972,0.0000)   (-0.0000,-0.0000)   (-0.0000,-0.0000)   (1.7689,-0.0000)   (3.5104,-0.0000)   (3.5104,0.0000) 
+  can.orb. 7   (-0.0028,-0.0000)   (-0.0000,0.0000)   (-0.0000,0.0000)   (4.7276,0.0000)   (4.4288,0.0000)   (4.4288,-0.0000) 
+  can.orb. 8   (-0.0028,0.0000)   (-0.0000,0.0000)   (0.0000,0.0000)   (10.9638,-0.0000)   (11.1184,0.0000)   (11.1184,0.0000) 
+  can.orb. 9   (0.9972,0.0000)   (0.0000,0.0000)   (-0.0000,-0.0000)   (5.4147,0.0000)   (3.6009,-0.0000)   (3.6009,0.0000) 
+  can.orb. 10   (-0.0028,0.0000)   (-0.0000,-0.0000)   (0.0000,-0.0000)   (20.2555,0.0000)   (6.8240,-0.0000)   (6.8240,-0.0000) 
+  can.orb. 11   (-1.0028,0.0000)   (0.0000,-0.0000)   (0.0000,-0.0000)   (0.6454,0.0000)   (1.2702,0.0000)   (1.2702,-0.0000) 
+  can.orb. 12   (-0.0028,0.0000)   (-0.0000,0.0000)   (-0.0000,-0.0000)   (7.3967,-0.0000)   (2.4911,0.0000)   (2.4911,0.0000) 
+  can.orb. 13   (0.9972,-0.0000)   (0.0000,-0.0000)   (0.0000,0.0000)   (0.6454,0.0000)   (1.2702,0.0000)   (1.2702,0.0000) 
+  can.orb. 14   (-0.0028,0.0000)   (-0.0000,-0.0000)   (-0.0000,0.0000)   (2.3290,-0.0000)   (1.1320,0.0000)   (1.1320,-0.0000) 
+  can.orb. 15   (-1.0028,0.0000)   (0.0000,-0.0000)   (0.0000,0.0000)   (1.3569,-0.0000)   (0.8966,-0.0000)   (0.8966,0.0000) 
+  can.orb. 16   (0.9972,-0.0000)   (0.0000,-0.0000)   (0.0000,-0.0000)   (1.3569,0.0000)   (0.8966,0.0000)   (0.8966,-0.0000) 
+  can.orb. 17   (-0.0028,-0.0000)   (-0.0000,-0.0000)   (0.0000,-0.0000)   (0.7971,-0.0000)   (0.8987,0.0000)   (0.8987,0.0000) 
+  can.orb. 18   (-0.0028,0.0000)   (-0.0000,0.0000)   (-0.0000,0.0000)   (3.3329,0.0000)   (1.1470,0.0000)   (1.1470,0.0000) 
+  can.orb. 19   (-0.0028,-0.0000)   (-0.0000,-0.0000)   (-0.0000,0.0000)   (1.4131,-0.0000)   (0.4763,-0.0000)   (0.4763,-0.0000) 
+
+
+RSP: done run scf2
+Number of MOs = 22
+
+
+RSP: Hartree-Fock orbitals have been obtained. 
+RSP: Hartree-Fock final energy = 0.4385315440147477
+Entering response module
+No. of electrons: (1.999999999999856,-7.700819006567083e-17)
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+Recomputed final SCF electronic energy (-2.604682089578115,-4.093980694100907e-17) (-1.642931445716634,-4.093980694120757e-17) (0.9617506438614811,-1.985046449727414e-28)
+unit_vectors():   MO Single-transition excitations in total.
+Constructing start guesses for RPA-solver using the 100 lowest ones.
+1 <- 0 : 1.078223225373903
+2 <- 0 : 1.131311208731731
+3 <- 0 : 1.177307101508355
+4 <- 0 : 1.247530768503673
+5 <- 0 : 1.389039919622359
+6 <- 0 : 1.478223225373904
+7 <- 0 : 1.503448651224796
+8 <- 0 : 1.587900288035376
+9 <- 0 : 1.647530768503663
+10 <- 0 : 1.66010424958148
+11 <- 0 : 2.386864324626096
+12 <- 0 : 2.390268678541419
+13 <- 0 : 2.78686432462609
+14 <- 0 : 3.111388995086604
+15 <- 0 : 3.226452008974019
+16 <- 0 : 3.626452008974027
+17 <- 0 : 4.109635513919168
+18 <- 0 : 4.130877167154741
+19 <- 0 : 8.307492488249185
+20 <- 0 : 19.42846109108672
+21 <- 0 : 30.10779939084079
+Made 21 starting vectors 
+DevINFO: screened away 524 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 23 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 261 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 4 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 7 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 130 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 49 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 23 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+DevINFO: screened away 0 out of 9751 symmetry unique quadruples ABCD.
+The Davidson solver is about to start.
+-------
+Davidson step #0, 42 RPA trial vectors already in subspace.
+The Davidson solver converged to a solution. 1 iterations and 0 restarts were needed.
+==============================================================================================================
+The Final eigenvalues from the Davidson method
+==============================================================================================================
+(RSP) 	 Excitation Energy 	0.7281318961398622	0.8372393882046177	0.9030175373326944	0.938820186402896	1.128131896139861	
+==============================================================================================================
+Root: 0	 with energy 0.7281318961398622
+==============================================================================================================
+1 <-- 0 C^2 :  0.9976470275654712 C : (-0.08317595601521963,0.9953535994341034)
+==============================================================================================================
+Root: 1	 with energy 0.8372393882046177
+==============================================================================================================
+2 <-- 0 C^2 :  0.9285416343561315 C : (0.6149890794852458,-0.741842346101934)
+==============================================================================================================
+Root: 2	 with energy 0.9030175373326944
+==============================================================================================================
+3 <-- 0 C^2 :  0.9855518178751125 C : (-0.4714991310651841,0.8736363014892922)
+==============================================================================================================
+Root: 3	 with energy 0.938820186402896
+==============================================================================================================
+4 <-- 0 C^2 :  0.9989634281199955 C : (0.2207881745305676,0.9747902390296361)
+==============================================================================================================
+Root: 4	 with energy 1.128131896139861
+==============================================================================================================
+6 <-- 0 C^2 :  0.997647027565471 C : (0.6899726768212384,0.7222082336872144)
+==============================================================================================================
+==============================================================================================================
+(RSP) Transition Dipole Moment, <1| coordinate |2>  |  Roots  |              Dipole Moment
+==============================================================================================================
+(RSP) Transition Dipole Moment, <1|x|2>             |    0    |     (1.16578174547985e-15,-1.029941331381851e-16)
+(RSP) Transition Dipole Moment, <1|x|2>             |    1    |     (-0.4301770439724886,0.5191012447260863)
+(RSP) Transition Dipole Moment, <1|x|2>             |    2    |     (-2.913641550250645e-14,5.206252096101593e-14)
+(RSP) Transition Dipole Moment, <1|x|2>             |    3    |     (-2.640674036624314e-14,-6.553028932081047e-14)
+(RSP) Transition Dipole Moment, <1|x|2>             |    4    |     (-1.136547948018081e-14,1.322798511780617e-14)
+
+(RSP) Transition Dipole Moment, <1|y|2>             |    0    |     (0.2134048322938246,-0.4661543919913032)
+(RSP) Transition Dipole Moment, <1|y|2>             |    1    |     (-1.381467268472208e-15,2.162238581606216e-15)
+(RSP) Transition Dipole Moment, <1|y|2>             |    2    |     (-6.285243801510864e-16,5.923950432691745e-16)
+(RSP) Transition Dipole Moment, <1|y|2>             |    3    |     (8.895371283101569e-14,-1.540455453084497e-14)
+(RSP) Transition Dipole Moment, <1|y|2>             |    4    |     (-0.2050635952079054,-0.4697429230718193)
+
+(RSP) Transition Dipole Moment, <1|z|2>             |    0    |     (-0.4661543919913033,-0.2134048322938247)
+(RSP) Transition Dipole Moment, <1|z|2>             |    1    |     (-4.865899350114944e-16,2.579967489646506e-15)
+(RSP) Transition Dipole Moment, <1|z|2>             |    2    |     (-4.9439619065339e-16,-5.204170427930421e-16)
+(RSP) Transition Dipole Moment, <1|z|2>             |    3    |     (-1.325632186757071e-14,-8.5635321486382e-14)
+(RSP) Transition Dipole Moment, <1|z|2>             |    4    |     (0.4697429230718192,-0.2050635952079055)
+
+
+==============================================================================================================
+(RSP) Transition Moment, <1| pi_coordinate |2>      |  Roots  |              Dipole Moment
+==============================================================================================================
+(RSP) Transition Moment, <1|pi_x|2>                 |    0    |     (8.465294580844292e-16,1.137137135009697e-15)
+(RSP) Transition Moment, <1|pi_x|2>                 |    1    |     (0.4305134882763016,0.3567647383983981)
+(RSP) Transition Moment, <1|pi_x|2>                 |    2    |     (-1.23410830166204e-13,-6.526441713450293e-14)
+(RSP) Transition Moment, <1|pi_x|2>                 |    3    |     (-6.524111560655209e-14,2.802252889808618e-14)
+(RSP) Transition Moment, <1|pi_x|2>                 |    4    |     (1.564918440874803e-14,1.094658528296174e-14)
+
+(RSP) Transition Moment, <1|pi_y|2>                 |    0    |     (-0.3337315142359062,-0.1527818230403082)
+(RSP) Transition Moment, <1|pi_y|2>                 |    1    |     (1.534881049762651e-16,-2.020680389386104e-16)
+(RSP) Transition Moment, <1|pi_y|2>                 |    2    |     (7.097308288276415e-16,7.145560282665919e-16)
+(RSP) Transition Moment, <1|pi_y|2>                 |    3    |     (4.870039223644649e-15,3.909842928747059e-14)
+(RSP) Transition Moment, <1|pi_y|2>                 |    4    |     (-0.5241978020484304,0.2288355621947252)
+
+(RSP) Transition Moment, <1|pi_z|2>                 |    0    |     (-0.1527818230403084,0.3337315142359065)
+(RSP) Transition Moment, <1|pi_z|2>                 |    1    |     (2.067030687342837e-16,2.588156090536112e-16)
+(RSP) Transition Moment, <1|pi_z|2>                 |    2    |     (-5.735572950486429e-16,7.17761566028969e-16)
+(RSP) Transition Moment, <1|pi_z|2>                 |    3    |     (4.080964082289751e-14,-7.051949297201391e-15)
+(RSP) Transition Moment, <1|pi_z|2>                 |    4    |     (-0.2288355621947253,-0.5241978020484305)
+
+
+==============================================================================================================
+(RSP) Electric Dipole Oscillator Strength
+(length gauge):            	0.2551777448362706	0.2536937999830189	2.143581846220062e-27	1.292488548773336e-26	0.3951612762414032	
+(magnetic-velocity gauge): 	0.2466934168748162	0.2489315453912551	1.438992769479306e-26	5.900474261594137e-27	0.3866557936080468	
+(mixed gauge):             	(0.2508997205739169,-5.551115123125841e-17)	(0.2513013921289591,-6.476300976980079e-16)	(-5.550084802012631e-27,-1.31870923778948e-28)	(-1.417298687154939e-27,1.464632196641463e-28)	(0.3908854011961669,3.330669073875691e-16)	
+

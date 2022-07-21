@@ -1,0 +1,3 @@
+State energy and spectral intensities are computed. 
+
+Orbital analysis of H2O is not computed. 

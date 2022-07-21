@@ -1,0 +1,9 @@
+1- State energy
+2- Oscillator strength
+3- Orbital Analysis
+
+He,H2 - Calculated 1,2,3
+H2O   - Calculated 1,2
+Be,Ne - Calculated 3
+
+For Be and Ne we computed  occupied orbital data as part of analysing occupied and unoccupied orbitals changes
