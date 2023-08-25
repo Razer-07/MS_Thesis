@@ -6,7 +6,7 @@
 1. Calculated state energies with different B for He,H2,H2O ---> Energy folder
 
 
-	energy_code.py  &rarr  To run the london input file either in PC or cluster based on your preference.
+	energy_code.py  --->  To run the london input file either in PC or cluster based on your preference.
 
 	Bx_Excited_Energy_extraction.py ---> To extract the excited energy from all the output files. [!!! Read the code before use to understood the output data order]
 
